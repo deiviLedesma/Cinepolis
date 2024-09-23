@@ -11,7 +11,7 @@ import java.sql.SQLException;
  *
  * @author filor
  */
-public interface IConeccionBD {
+public interface IConexionBD {
     
-    Connection crearConexion() throws SQLException;
+    Connection obtenerConexion() throws SQLException;
 }
