@@ -24,7 +24,7 @@ public class PeliculaDAO {
     private IConexionBD conexionBD;
 
     public PeliculaDAO() throws SQLDataException {
-        this.conexionBD = conexionBD;
+        this.conexionBD = new ConexionBD();
     }
 
     public void insertarPelicula(PeliculaEntidad pelicula, PaisEntidad Idpais) throws SQLException {

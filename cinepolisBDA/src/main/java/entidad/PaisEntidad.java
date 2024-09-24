@@ -13,6 +13,7 @@ public class PaisEntidad {
     private String nombre;
     private int numeroHabitantes;
 
+    
     public PaisEntidad(int idPais, String nombre, int numeroHabitantes) {
         this.idPais = idPais;
         this.nombre = nombre;
