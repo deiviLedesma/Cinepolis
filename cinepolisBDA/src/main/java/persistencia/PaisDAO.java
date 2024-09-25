@@ -58,4 +58,16 @@ public class PaisDAO {
            throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
         }
     }
+
+    public void eliminarPais(int idPais) throws SQLException{
+        String eliminar= "DELETE FROM Paises WHERE idPais = ?";
+
+        try (Connnection conexion = conexionBD.obtenerConexion(); PreparedStatement stmt = connection.preparedStatement(sql)){
+            stmt.setInt(1, idPais);
+            stmt.executeUpdate();
+        } Catch(PersistenciaException e){
+            throw new PersistenciaException("El Pais no se puede eliminar porque no ha sido encontrado")
+                        
+    
+    }
 }
