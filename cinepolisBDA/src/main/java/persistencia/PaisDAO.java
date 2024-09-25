@@ -65,7 +65,7 @@ public class PaisDAO {
         try (Connnection conexion = conexionBD.obtenerConexion(); PreparedStatement stmt = connection.preparedStatement(sql)){
             stmt.setInt(1, idPais);
             stmt.executeUpdate();
-        } Catch(PersistenciaException e){
+        } Catch(SQLException e){
             throw new PersistenciaException("El Pais no se puede eliminar porque no ha sido encontrado")
                         
     
