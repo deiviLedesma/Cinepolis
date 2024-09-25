@@ -71,4 +71,16 @@ public class ClienteDAO {
         }
     
     }
+    
+       public void EliminarCliente(int idCliente) throws PersistenciaException, SQLException {
+
+        String eliminar = "DELETE FROM Clientes  WHERE idCliente = ?";
+
+        try (Connection connection = conexionBD.obtenerConexion(); PreparedStatement stmt = connection.prepareStatement(eliminar)) {
+            stmt.setInt(1, idCliente);
+            stmt.executeUpdate();
+        } catch(SQLException e){
+            throw new PersistenciaException("No se pudo eliminar el Cliente porque no se encontró");
+        }
+    }
 }

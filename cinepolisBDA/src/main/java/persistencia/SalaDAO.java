@@ -35,15 +35,16 @@ public class SalaDAO {
 
     }
 
-      
-    public void eliminarSala(int idSala) throws SQLException {
+    public void eliminarSala(int idSala) throws SQLException, PersistenciaException {
         String sql = "DELETE FROM Salas WHERE idPelicula = ?";
         try (Connection connection = conexionBD.obtenerConexion(); PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, idSala);
             stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new PersistenciaException("No se pudo elinminar la sala porque no se encontró");
         }
     }
-    
+
     public SalaEntidad obtenerSalaPorId(int idSala) throws SQLException {
         SalaEntidad sala = null;
         String sql = "SELECT * FROM Salas WHERE idSala = ?";

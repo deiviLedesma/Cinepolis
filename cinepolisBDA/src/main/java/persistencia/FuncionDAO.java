@@ -68,4 +68,6 @@ public class FuncionDAO {
         }
     
     }
+    
+    //agregar estatus de eliminado mas no eliminar
 }

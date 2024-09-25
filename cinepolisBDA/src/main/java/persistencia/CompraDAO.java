@@ -49,7 +49,7 @@ public class CompraDAO {
             preparedStatement.setString(3, compra.getNombreCliente());
             preparedStatement.setString(4, compra.getCorreoCliente());
             preparedStatement.setInt(5, compra.getCantidadAsientos());
-            preparedStatement.setString(6,compra.getMetodoDePago());
+            preparedStatement.setString(6, compra.getMetodoDePago());
             preparedStatement.setDouble(7, compra.getCostoTotal());
             preparedStatement.setInt(8, compra.getIdCliente());
 
@@ -67,5 +67,18 @@ public class CompraDAO {
         } catch (SQLException ex) {
             throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
         }
+
     }
+
+    /**
+     * public void EliminarCompra(int idCompra) throws PersistenciaException,
+     * SQLException {
+     *
+     * String eliminar = "DELETE FROM Compras WHERE idCompra = ?";
+     *
+     * try (Connection connection = conexionBD.obtenerConexion();
+     * PreparedStatement stmt = connection.prepareStatement(eliminar)) {
+     * stmt.setInt(1, idCompra); stmt.executeUpdate(); } }
+    *
+     */
 }
