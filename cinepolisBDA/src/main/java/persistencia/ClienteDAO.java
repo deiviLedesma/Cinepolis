@@ -5,7 +5,6 @@
 package persistencia;
 
 import dtos.ClienteDTO;
-import entidad.CiudadEntidad;
 import entidad.ClienteEntidad;
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,15 +12,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
+import utilerias.Encriptador;
 
 /**
  *
  * @author filor
  */
 public class ClienteDAO {
+
     private IConexionBD conexionBD;
     private Connection conexionGeneral;
+
     public ClienteDAO() {
         this.conexionBD = new ConexionBD();
     }
@@ -29,8 +30,7 @@ public class ClienteDAO {
     public ClienteDAO(IConexionBD conexionBD) {
         this.conexionBD = conexionBD;
     }
-    
-    
+
     public ClienteEntidad buscarPorId(int id) throws PersistenciaException {
         try {
             ClienteEntidad cliente = null;
@@ -69,8 +69,7 @@ public class ClienteDAO {
             throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
         }
     }
-    
-    
+
     private int GuardarCliente(ClienteDTO cliente) throws SQLException {
         int idCliente = 0;
         String insertCliente = """
@@ -105,7 +104,7 @@ public class ClienteDAO {
         }
         return idCliente;
     }
-    
+
     public ClienteEntidad guardarConTransacion(ClienteDTO cliente) throws PersistenciaException {
         try {
             this.conexionGeneral = this.conexionBD.obtenerConexion();
@@ -135,7 +134,7 @@ public class ClienteDAO {
             }
         }
     }
-    
+
     public ClienteEntidad eliminar(int idCliente) throws PersistenciaException {
         try {
 
@@ -176,7 +175,7 @@ public class ClienteDAO {
             throw new PersistenciaException("Ocurrió un error al modificar, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
         }
     }
-    
+
     public ClienteEntidad modificar(ClienteDTO cliente) throws PersistenciaException {
         try {
 
@@ -228,7 +227,7 @@ public class ClienteDAO {
             throw new PersistenciaException("Ocurrió un error al modificar, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
         }
     }
-    
+
     private ClienteEntidad clienteEntidad(ResultSet resultado) throws SQLException {
         int id = resultado.getInt("idCliente");
         String nombre = resultado.getString("nombres");
@@ -238,21 +237,37 @@ public class ClienteDAO {
         String contraseña = resultado.getString("contraseña");
         Date fechaNacimiento = resultado.getDate("fechaNacimiento");
         int idCiudad = resultado.getInt("idCiudad");
-        
+
 //        boolean estatus = resultado.getBoolean("estaEliminado");
 //        LocalDateTime fechaHoraRegistro = resultado.getTimestamp("fechaHoraRegistro").toLocalDateTime();
-        return new ClienteEntidad(id,contraseña,correo,nombre,paterno,materno,fechaNacimiento,12,12,idCiudad);
+        return new ClienteEntidad(id, contraseña, correo, nombre, paterno, materno, fechaNacimiento, 12, 12, idCiudad);
     }
-    
-       public void EliminarCliente(int idCliente) throws PersistenciaException, SQLException {
+
+    public void EliminarCliente(int idCliente) throws PersistenciaException, SQLException {
 
         String eliminar = "DELETE FROM Clientes  WHERE idCliente = ?";
 
         try (Connection connection = conexionBD.obtenerConexion(); PreparedStatement stmt = connection.prepareStatement(eliminar)) {
             stmt.setInt(1, idCliente);
             stmt.executeUpdate();
-        } catch(SQLException e){
+        } catch (SQLException e) {
             throw new PersistenciaException("No se pudo eliminar el Cliente porque no se encontró");
+        }
+    }
+
+    public boolean validarCliente(String correo, String password) throws SQLException {
+        String sql = "SELECT contraseña FROM Clientes WHERE correoElectrónico = ?";
+
+        try (Connection conn = conexionBD.obtenerConexion(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, correo);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String storedHashedPassword = rs.getString("contraseña");
+                    return Encriptador.checkPassword(password, storedHashedPassword);
+                } else {
+                    return false; // Correo no encontrado
+                }
+            }
         }
     }
 }
