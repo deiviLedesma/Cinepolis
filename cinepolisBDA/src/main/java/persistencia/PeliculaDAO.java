@@ -4,13 +4,9 @@
  */
 package persistencia;
 
-import com.mysql.cj.protocol.Resultset;
-import dtos.ClienteDTO;
 import dtos.PeliculaDTO;
-import entidad.ClienteEntidad;
 import entidad.PaisEntidad;
 import entidad.PeliculaEntidad;
-import entidad.SalaEntidad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -171,7 +167,7 @@ public class PeliculaDAO {
             }
         }
     }
-    
+
     public PeliculaEntidad modificar(PeliculaDTO pelicula) throws PersistenciaException {
         try {
 
@@ -235,6 +231,31 @@ public class PeliculaDAO {
         int clasificacion = rs.getInt("idClasificacion");
         int pais = rs.getInt("idPais");
         return new PeliculaEntidad(id, titulo, duracion, sinopsis, imagen, trailer, genero, clasificacion, pais);
+    }
+
+    public List<PeliculaDTO> obtenerPeliculasPorSucursal(int idSucursal) throws Exception {
+        List<PeliculaDTO> dTOs = new ArrayList<>();
+        String sql = "SELECT p.idPelicula, p.titulo, p.sinopsis, p.imagen "
+                + "FROM Peliculas p "
+                + "JOIN Funciones f ON p.idPelicula = f.idPelicula "
+                + "JOIN Salas s ON f.idSala = s.idSala "
+                + "WHERE s.idSucursal = ?";
+
+        try (Connection con = conexionBD.obtenerConexion(); PreparedStatement ps = conexionBD.obtenerConexion().prepareCall(sql)) {
+            ps.setInt(1, idSucursal);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    PeliculaDTO pelicula = new PeliculaDTO();
+                    pelicula.setIdPelicula(rs.getInt("idPelicula"));
+                    pelicula.setTitulo(rs.getString("titulo"));
+                    pelicula.setSinopsis(rs.getString("sinopsis"));
+                    pelicula.setImagen(rs.getString("imagen")); // Ruta de la imagen
+                    dTOs.add(pelicula);
+                }
+            }
+        }
+        return dTOs;
+
     }
 
 }
