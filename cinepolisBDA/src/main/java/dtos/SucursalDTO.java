@@ -38,4 +38,8 @@ public class SucursalDTO {
         this.distancia = distancia;
     }
 
+    public int getIdSucursal() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
