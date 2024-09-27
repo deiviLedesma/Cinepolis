@@ -4,6 +4,7 @@
 
 package com.mycompany.cinepolisbda;
 
+import dtos.ClienteDTO;
 import entidad.CiudadEntidad;
 import entidad.ClasificacionEntidad;
 import entidad.ClienteEntidad;
@@ -44,9 +45,9 @@ public class CinepolisBDA {
         GeneroEntidad ge2 = new GeneroEntidad(2,"R");
         
         ClienteDAO cdao = new ClienteDAO();
-        ClienteEntidad ce = new ClienteEntidad(1, "contraseña","correo@gmail", "manuel","Lopez","Dueñas",new Date(55-9-24),new Point(),1);
+        ClienteDTO ce = new ClienteDTO(1, "pasword","dwasdawd@gmail", "Mario","Castañeda","Dueewwas",new Date(55-9-24),21,12,1);
         try {
-            cdao.insertarCliente(ce);
+            cdao.modificar(ce);
         } catch (PersistenciaException ex) {
             Logger.getLogger(CinepolisBDA.class.getName()).log(Level.SEVERE, null, ex);
         }

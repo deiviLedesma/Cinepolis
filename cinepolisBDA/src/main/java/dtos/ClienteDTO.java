@@ -2,16 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package entidad;
+package dtos;
 
-import java.awt.Point;
 import java.sql.Date;
 
 /**
  *
  * @author filor
  */
-public class ClienteEntidad {
+public class ClienteDTO {
     private int idCliente;
     private String contrasenia;
     private String correo;
@@ -23,10 +22,10 @@ public class ClienteEntidad {
     private double y;
     private int idCiudad;
 
-    public ClienteEntidad() {
+    public ClienteDTO() {
     }
 
-    public ClienteEntidad(int idCliente, String contrasenia, String correo, String nombres, String ApellidoPaterno, String ApellidoMaterno, Date fechaNacimiento, double x, double y, int idCiudad) {
+    public ClienteDTO(int idCliente, String contrasenia, String correo, String nombres, String ApellidoPaterno, String ApellidoMaterno, Date fechaNacimiento, double x, double y, int idCiudad) {
         this.idCliente = idCliente;
         this.contrasenia = contrasenia;
         this.correo = correo;
@@ -38,8 +37,6 @@ public class ClienteEntidad {
         this.y = y;
         this.idCiudad = idCiudad;
     }
-
-    
 
     public int getIdCliente() {
         return idCliente;
@@ -113,8 +110,6 @@ public class ClienteEntidad {
         this.y = y;
     }
 
-    
-
     public int getIdCiudad() {
         return idCiudad;
     }
@@ -122,6 +117,6 @@ public class ClienteEntidad {
     public void setIdCiudad(int idCiudad) {
         this.idCiudad = idCiudad;
     }
-
+    
     
 }
