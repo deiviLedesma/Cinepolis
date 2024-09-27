@@ -148,9 +148,9 @@ public class ClienteDAO {
 
             // Definimos la consulta SQL para actualizar un cliente en la tabla 'clientes'
             String updateCliente = """
-                                UPDATE clientes 
-                                SET estaEliminado = 1
-                                WHERE idcliente = ?
+                                   DELETE FROM
+                                   clientes
+                                   WHERE idCliente=?
                                 """;
 
             // Creamos un objeto PreparedStatement para ejecutar la consulta de actualización

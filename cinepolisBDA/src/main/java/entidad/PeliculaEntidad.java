@@ -17,6 +17,7 @@ public class PeliculaEntidad {
     private String trailer;
     private int idGenero;
     private int idClasificacion;
+    private int idPais;
 
     public PeliculaEntidad(int idPelicula, String titulo, int duracionEnMinutos, String sinopsis, String imagen, String trailer, int idGenero, int idClasificacion) {
         this.idPelicula = idPelicula;
@@ -30,6 +31,26 @@ public class PeliculaEntidad {
     }
 
     public PeliculaEntidad() {
+    }
+
+    public PeliculaEntidad(int idPelicula, String titulo, int duracionEnMinutos, String sinopsis, String imagen, String trailer, int idGenero, int idClasificacion, int idPais) {
+        this.idPelicula = idPelicula;
+        this.titulo = titulo;
+        this.duracionEnMinutos = duracionEnMinutos;
+        this.sinopsis = sinopsis;
+        this.imagen = imagen;
+        this.trailer = trailer;
+        this.idGenero = idGenero;
+        this.idClasificacion = idClasificacion;
+        this.idPais = idPais;
+    }
+
+    public int getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
     }
 
     public int getIdPelicula() {
