@@ -5,6 +5,7 @@
 package com.mycompany.cinepolisbda;
 
 import dtos.ClienteDTO;
+import dtos.PeliculaDTO;
 import entidad.CiudadEntidad;
 import entidad.ClasificacionEntidad;
 import entidad.ClienteEntidad;
@@ -12,6 +13,7 @@ import entidad.GeneroEntidad;
 import entidad.PaisEntidad;
 import java.awt.Point;
 import java.sql.Date;
+import java.sql.SQLDataException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import persistencia.CiudadDAO;
@@ -21,6 +23,7 @@ import persistencia.ConexionBD;
 import persistencia.GeneroDAO;
 import persistencia.IConexionBD;
 import persistencia.PaisDAO;
+import persistencia.PeliculaDAO;
 import persistencia.PersistenciaException;
 
 /**
@@ -46,8 +49,14 @@ public class CinepolisBDA {
         
         ClienteDAO cdao = new ClienteDAO();
         ClienteDTO ce = new ClienteDTO(1, "pasword","dwasdawd@gmail", "Mario","Castañeda","Dueewwas",new Date(55-9-24),21,12,1);
+        
         try {
-            cdao.modificar(ce);
+            PeliculaDAO pdao = new PeliculaDAO();
+            PeliculaDTO pdto = new PeliculaDTO(1,"httyd", 160,"graones","imagen","dsadd",1,1,1);
+            
+            pdao.guardarConTransacion(pdto);
+        } catch (SQLDataException ex) {
+            Logger.getLogger(CinepolisBDA.class.getName()).log(Level.SEVERE, null, ex);
         } catch (PersistenciaException ex) {
             Logger.getLogger(CinepolisBDA.class.getName()).log(Level.SEVERE, null, ex);
         }
