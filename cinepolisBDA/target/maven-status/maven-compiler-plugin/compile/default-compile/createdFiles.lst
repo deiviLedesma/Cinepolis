@@ -5,11 +5,14 @@ persistencia\GeneroDAO.class
 utilerias\ComboItems.class
 Presentacion\LoginFrame.class
 Presentacion\HelpFrame.class
+persistencia\IClienteDAO.class
 entidad\CiudadEntidad.class
 persistencia\CiudadDAO.class
 Presentacion\PayFrame$1.class
+Negocio\SalaService.class
 Presentacion\CarteleraFrame.class
 utilerias\JButtonCellEditor.class
+Negocio\NegocioException.class
 utilerias\Encriptador.class
 persistencia\PeliculaDAO.class
 persistencia\ClienteDAO.class
@@ -21,6 +24,8 @@ Presentacion\ScheduleFrame$1.class
 entidad\GeneroEntidad.class
 dtos\GeneroDTO.class
 persistencia\IConexionBD.class
+dtos\ClienteFiltroTablaDTO.class
+dtos\ClienteTablaDTO.class
 Presentacion\LoginFrame$1.class
 Presentacion\PayFrame.class
 dtos\ClasificacionDTO.class
@@ -50,8 +55,10 @@ Presentacion\HelpFrame$1.class
 Negocio\PeliculaService.class
 persistencia\PersistenciaException.class
 entidad\CompraFuncionEntidad.class
+Negocio\ClienteService.class
 persistencia\SucursalDAO.class
 entidad\ClasificacionEntidad.class
+Negocio\FuncionService.class
 Presentacion\ReportsFrame$1.class
 dtos\ClienteDTO.class
 Presentacion\MenuPrincipalFrame.class
