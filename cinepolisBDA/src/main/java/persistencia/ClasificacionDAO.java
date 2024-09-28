@@ -4,6 +4,7 @@
  */
 package persistencia;
 
+import dtos.ClasificacionDTO;
 import entidad.ClasificacionEntidad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +27,7 @@ public class ClasificacionDAO {
         this.conexionBD = conexionBD;
     }
     
-    public void insertarClasificacion(ClasificacionEntidad clasificacion)throws PersistenciaException{
+    public void insertarClasificacion(ClasificacionDTO clasificacion)throws PersistenciaException{
         try {
             Connection conexion = this.conexionBD.obtenerConexion();
         

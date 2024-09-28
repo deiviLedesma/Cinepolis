@@ -4,6 +4,7 @@
  */
 package persistencia;
 
+import dtos.GeneroDTO;
 import entidad.GeneroEntidad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +27,7 @@ public class GeneroDAO {
         this.conexionBD = conexionBD;
     }
     
-    public void insertarGenero(GeneroEntidad genero)throws PersistenciaException{
+    public void insertarGenero(GeneroDTO genero)throws PersistenciaException{
         try {
             Connection conexion = this.conexionBD.obtenerConexion();
         

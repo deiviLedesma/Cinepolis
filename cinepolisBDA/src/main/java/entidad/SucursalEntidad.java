@@ -13,16 +13,18 @@ import java.awt.Point;
 public class SucursalEntidad {
     private int idSucursal;
     private String nombre;
-    private Point ubicacion;
+    private double latitud;
+    private double longitud;
     private int idCiudad;
 
     public SucursalEntidad() {
     }
 
-    public SucursalEntidad(int idSucursal, String nombre, Point ubicacion, int idCiudad) {
+    public SucursalEntidad(int idSucursal, String nombre, double latitud, double longitud, int idCiudad) {
         this.idSucursal = idSucursal;
         this.nombre = nombre;
-        this.ubicacion = ubicacion;
+        this.latitud = latitud;
+        this.longitud = longitud;
         this.idCiudad = idCiudad;
     }
 
@@ -42,12 +44,20 @@ public class SucursalEntidad {
         this.nombre = nombre;
     }
 
-    public Point getUbicacion() {
-        return ubicacion;
+    public double getLatitud() {
+        return latitud;
     }
 
-    public void setUbicacion(Point ubicacion) {
-        this.ubicacion = ubicacion;
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
 
     public int getIdCiudad() {
@@ -58,10 +68,6 @@ public class SucursalEntidad {
         this.idCiudad = idCiudad;
     }
 
-    @Override
-    public String toString() {
-        return "SucursalEntidad{" + "idSucursal=" + idSucursal + ", nombre=" + nombre + ", ubicacion=" + ubicacion + ", idCiudad=" + idCiudad + '}';
-    }
     
     
 }

@@ -4,6 +4,7 @@
  */
 package persistencia;
 
+import dtos.CiudadDTO;
 import entidad.CiudadEntidad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +27,7 @@ public class CiudadDAO {
         this.conexionBD = conexionBD;
     }
     
-    public void insertarCiudad(CiudadEntidad ciudad)throws PersistenciaException{
+    public void insertarCiudad(CiudadDTO ciudad)throws PersistenciaException{
         try {
             Connection conexion = this.conexionBD.obtenerConexion();
         

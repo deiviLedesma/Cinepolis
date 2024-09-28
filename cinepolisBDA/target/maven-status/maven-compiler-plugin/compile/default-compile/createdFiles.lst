@@ -29,6 +29,7 @@ dtos\CompraDTO.class
 persistencia\PersistenciaException.class
 dtos\SucursalDTO.class
 entidad\CompraFuncionEntidad.class
+persistencia\SucursalDAO.class
 persistencia\CompraFuncionDAO.class
 entidad\ClasificacionEntidad.class
 entidad\PeliculaEntidad.class

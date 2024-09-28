@@ -4,6 +4,7 @@
  */
 package persistencia;
 
+import dtos.PaisDTO;
 import entidad.PaisEntidad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +29,7 @@ public class PaisDAO {
         this.conexionBD = new ConexionBD();
     }
     
-    public void insertarPais(PaisEntidad paisEntidad) throws PersistenciaException{
+    public void insertarPais(PaisDTO paisEntidad) throws PersistenciaException{
         try {
             Connection conexion = this.conexionBD.obtenerConexion();
         
