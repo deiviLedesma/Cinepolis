@@ -13,6 +13,7 @@ C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\P
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\dtos\PeliculaDTO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\entidad\CiudadEntidad.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\CompraDAO.java
+C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\dtos\FiltroTablaDTO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\GeneroDAO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\Presentacion\HelpFrame.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\Presentacion\AdminViewFrame.java
@@ -51,10 +52,10 @@ C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\p
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\negocio\SalaService.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\negocio\ClienteService.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\entidad\PeliculaEntidad.java
+C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\ISalaDAO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\entidad\CompraFuncionEntidad.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\dtos\SalaDTO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\negocio\NegocioException.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\IClienteDAO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\dtos\ClasificacionDTO.java
-C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\dtos\ClienteFiltroTablaDTO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\dtos\ClienteTablaDTO.java
