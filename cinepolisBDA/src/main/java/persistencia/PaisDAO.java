@@ -4,6 +4,7 @@
  */
 package persistencia;
 
+import dtos.PaisDTO;
 import entidad.PaisEntidad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,56 +19,44 @@ import java.util.logging.Logger;
  * @author filor
  */
 public class PaisDAO {
-
     private IConexionBD conexionBD;
 
     public PaisDAO(IConexionBD conexionBD) {
         this.conexionBD = conexionBD;
     }
-
+    
     public PaisDAO() {
         this.conexionBD = new ConexionBD();
     }
-
-    public void insertarPais(PaisEntidad paisEntidad) throws PersistenciaException {
+    
+    public void insertarPais(PaisDTO paisEntidad) throws PersistenciaException{
         try {
             Connection conexion = this.conexionBD.obtenerConexion();
-
+        
             String insertCliente = """
                                     INSERT INTO paises (nombrePais,
                                    cantidadHabitantes)
                                                  VALUES (?,?);
                                     """;
-
+            
             PreparedStatement preparedStatement = conexion.prepareStatement(insertCliente, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, paisEntidad.getNombre());
             preparedStatement.setInt(2, paisEntidad.getNumeroHabitantes());
-
+            
             int filasAfectadas = preparedStatement.executeUpdate();
             if (filasAfectadas == 0) {
                 throw new PersistenciaException("La inserción del cliente falló, no se pudo insertar el registro.");
             }
 
-            ResultSet resultado = preparedStatement.getGeneratedKeys();
-
+            ResultSet resultado = preparedStatement.getGeneratedKeys();    
+            
             resultado.close();
             preparedStatement.close();
             conexion.close();
-
-        } catch (SQLException ex) {
-            throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
+            
+            
+            } catch (SQLException ex) {
+           throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
         }
-    }
-
-    public void eliminarPais(int idPais) throws SQLException, PersistenciaException {
-        String eliminar = "DELETE FROM Paises WHERE idPais = ?";
-
-        try (Connection connection = conexionBD.obtenerConexion(); PreparedStatement stmt = connection.prepareStatement(eliminar)) {
-            stmt.setInt(1, idPais);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new PersistenciaException("No se pudo eliminar el Cliente porque no se encontró");
-        }
-
     }
 }

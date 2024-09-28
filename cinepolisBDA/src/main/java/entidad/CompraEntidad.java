@@ -5,6 +5,7 @@
 package entidad;
 import java.sql.Time;
 import java.sql.Date;
+import java.time.LocalDateTime;
 /**
  *
  * @author filor
@@ -12,7 +13,7 @@ import java.sql.Date;
 public class CompraEntidad {
     private int idCompra;
     private String codigoCompra;
-    private Date fechaHoraCompra;
+    private LocalDateTime fechaHoraCompra;
     private String nombreCliente;
     private String correoCliente;
     private int cantidadAsientos;
@@ -23,7 +24,7 @@ public class CompraEntidad {
     public CompraEntidad() {
     }
 
-    public CompraEntidad(int idCompra, String codigoCompra, Date fechaHoraCompra, String nombreCliente, String correoCliente, int cantidadAsientos, String metodoDePago, double costoTotal, int idCliente) {
+    public CompraEntidad(int idCompra, String codigoCompra, LocalDateTime fechaHoraCompra, String nombreCliente, String correoCliente, int cantidadAsientos, String metodoDePago, double costoTotal, int idCliente) {
         this.idCompra = idCompra;
         this.codigoCompra = codigoCompra;
         this.fechaHoraCompra = fechaHoraCompra;
@@ -34,6 +35,8 @@ public class CompraEntidad {
         this.costoTotal = costoTotal;
         this.idCliente = idCliente;
     }
+
+    
 
     public int getIdCompra() {
         return idCompra;
@@ -51,13 +54,14 @@ public class CompraEntidad {
         this.codigoCompra = codigoCompra;
     }
 
-    public Date getFechaHoraCompra() {
+    public LocalDateTime getFechaHoraCompra() {
         return fechaHoraCompra;
     }
 
-    public void setFechaHoraCompra(Date fechaHoraCompra) {
+    public void setFechaHoraCompra(LocalDateTime fechaHoraCompra) {
         this.fechaHoraCompra = fechaHoraCompra;
     }
+
 
     public String getNombreCliente() {
         return nombreCliente;
@@ -107,10 +111,6 @@ public class CompraEntidad {
         this.idCliente = idCliente;
     }
 
-    @Override
-    public String toString() {
-        return "CompraEntidad{" + "idCompra=" + idCompra + ", codigoCompra=" + codigoCompra + ", fechaHoraCompra=" + fechaHoraCompra + ", nombreCliente=" + nombreCliente + ", correoCliente=" + correoCliente + ", cantidadAsientos=" + cantidadAsientos + ", metodoDePago=" + metodoDePago + ", costoTotal=" + costoTotal + ", idCliente=" + idCliente + '}';
-    }
     
      
     

@@ -177,7 +177,7 @@ public class PeliculaDAO {
             String updateCliente = """
                                 UPDATE peliculas
                                 SET
-                                    idPelicula =?,
+                                    
                                     titulo =?,
                                     duraciónEnMinutos =?,
                                     sinopsis =?,
@@ -186,7 +186,7 @@ public class PeliculaDAO {
                                     idGenero =?,
                                     idClasificacion =?,
                                     idPais =?
-                                WHERE idcliente = ?
+                                WHERE idPelicula = ?
                                 """;
 
             // Creamos un objeto PreparedStatement para ejecutar la consulta de actualización

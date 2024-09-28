@@ -4,10 +4,69 @@
  */
 package dtos;
 
+import java.sql.Time;
+
 /**
  *
  * @author filor
  */
 public class CompraFuncionDTO {
+    private int idCompraFuncion;
+    private double precio;
+    private Time horaFuncion;
+    private int idCompra;
+    private int idFuncion;
+
+    public CompraFuncionDTO() {
+    }
+
+    public CompraFuncionDTO(int idCompraFuncion, double precio, Time horaFuncion, int idCompra, int idFuncion) {
+        this.idCompraFuncion = idCompraFuncion;
+        this.precio = precio;
+        this.horaFuncion = horaFuncion;
+        this.idCompra = idCompra;
+        this.idFuncion = idFuncion;
+    }
+
+    public int getIdCompraFuncion() {
+        return idCompraFuncion;
+    }
+
+    public void setIdCompraFuncion(int idCompraFuncion) {
+        this.idCompraFuncion = idCompraFuncion;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public Time getHoraFuncion() {
+        return horaFuncion;
+    }
+
+    public void setHoraFuncion(Time horaFuncion) {
+        this.horaFuncion = horaFuncion;
+    }
+
+    public int getIdCompra() {
+        return idCompra;
+    }
+
+    public void setIdCompra(int idCompra) {
+        this.idCompra = idCompra;
+    }
+
+    public int getIdFuncion() {
+        return idFuncion;
+    }
+
+    public void setIdFuncion(int idFuncion) {
+        this.idFuncion = idFuncion;
+    }
+    
     
 }
