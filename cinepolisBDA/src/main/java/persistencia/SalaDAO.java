@@ -123,7 +123,7 @@ public class SalaDAO {
 
             rs.close();
             stmt.close();
-            conexionGeneral.close();
+            connection.close();
 
             return sala;
         }

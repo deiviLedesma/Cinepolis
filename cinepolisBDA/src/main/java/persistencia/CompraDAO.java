@@ -32,7 +32,7 @@ public class CompraDAO {
     public CompraDAO(IConexionBD conexionBD) {
         this.conexionBD = conexionBD;
     }
-    
+
     private int guardarCompra(CompraDTO compra) throws SQLException {
         int idCompra = 0;
         String insertCompra = """
@@ -52,7 +52,7 @@ public class CompraDAO {
             preparedStatement.setString(3, compra.getNombreCliente());
             preparedStatement.setString(4, compra.getCorreoCliente());
             preparedStatement.setInt(5, compra.getCantidadAsientos());
-            preparedStatement.setString(6,compra.getMetodoDePago());
+            preparedStatement.setString(6, compra.getMetodoDePago());
             preparedStatement.setDouble(7, compra.getCostoTotal());
             preparedStatement.setInt(8, compra.getIdCliente());
 
@@ -66,7 +66,7 @@ public class CompraDAO {
         }
         return idCompra;
     }
-    
+
     public CompraEntidad guardarConTransacion(CompraDTO compra) throws PersistenciaException {
         try {
             this.conexionGeneral = this.conexionBD.obtenerConexion();
@@ -95,8 +95,9 @@ public class CompraDAO {
             }
         }
     }
-    
+
     public CompraEntidad obtenerCompraPorId(int id) throws SQLException {
+
         CompraEntidad compra = null;
         String sql = """ 
                      SELECT idCompra,
@@ -106,7 +107,7 @@ public class CompraDAO {
                      correoCliente,
                      cantidadAsientos,
                      metodoDePago,
-                     constoTotal
+                     costoTotal,
                      idCliente
                      FROM compras WHERE idCompra = ? """;
         try (Connection connection = conexionBD.obtenerConexion(); PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -119,12 +120,12 @@ public class CompraDAO {
 
             rs.close();
             stmt.close();
-            conexionGeneral.close();
+            connection.close();
 
             return compra;
         }
     }
-    
+
     private CompraEntidad compraEntidad(ResultSet rs) throws SQLException {
         int id = rs.getInt("idCompra");
         String codigo = rs.getString("codigoCompra");
@@ -133,8 +134,8 @@ public class CompraDAO {
         String correo = rs.getString("correoCliente");
         int asientos = rs.getInt("cantidadAsientos");
         String pago = rs.getString("metodoDePago");
-        double total = rs.getDouble("CostoTotal");
+        double total = rs.getDouble("costoTotal");
         int idCliente = rs.getInt("idCliente");
-        return new CompraEntidad();
+        return new CompraEntidad(id, codigo, hora, cliente, correo, asientos, pago, total, idCliente);
     }
 }

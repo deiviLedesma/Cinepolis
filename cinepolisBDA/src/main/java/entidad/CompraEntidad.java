@@ -111,10 +111,6 @@ public class CompraEntidad {
         this.idCliente = idCliente;
     }
 
-    @Override
-    public String toString() {
-        return "CompraEntidad{" + "idCompra=" + idCompra + ", codigoCompra=" + codigoCompra + ", fechaHoraCompra=" + fechaHoraCompra + ", nombreCliente=" + nombreCliente + ", correoCliente=" + correoCliente + ", cantidadAsientos=" + cantidadAsientos + ", metodoDePago=" + metodoDePago + ", costoTotal=" + costoTotal + ", idCliente=" + idCliente + '}';
-    }
     
      
     

@@ -4,6 +4,8 @@
 package com.mycompany.cinepolisbda;
 
 import dtos.ClienteDTO;
+import dtos.CompraDTO;
+import dtos.CompraFuncionDTO;
 import dtos.FuncionDTO;
 import dtos.PeliculaDTO;
 import dtos.SalaDTO;
@@ -16,12 +18,17 @@ import entidad.PaisEntidad;
 import java.awt.Point;
 import java.sql.Date;
 import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import persistencia.CiudadDAO;
 import persistencia.ClasificacionDAO;
 import persistencia.ClienteDAO;
+import persistencia.CompraDAO;
+import persistencia.CompraFuncionDAO;
 import persistencia.ConexionBD;
 import persistencia.FuncionDAO;
 import persistencia.GeneroDAO;
@@ -38,7 +45,7 @@ import persistencia.SucursalDAO;
  */
 public class CinepolisBDA {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         IConexionBD coneccion = new ConexionBD();
         PaisDAO paisDAO = new PaisDAO(coneccion);
@@ -72,8 +79,20 @@ public class CinepolisBDA {
         Time time = Time.valueOf("14:23:10");
         FuncionDTO fdto = new FuncionDTO(1,time,Time.valueOf("16:40:30"),time,2,12.3,1,1);
         
+        CompraDAO compraDAO = new CompraDAO();
+        
+        CompraDTO compraDTO = new CompraDTO(1,"papas",LocalDateTime.of(2024, 8, 9, 10, 56),"pedro","dadsa",2,"paypal",230,3);
+        
+        String codigo = compraDAO.obtenerCompraPorId(3).getCorreoCliente();
+        System.out.println(codigo);
+        System.out.println(salaDAO.obtenerSalaPorId(1).getAsientosDisponibles());
+        
+        CompraFuncionDTO cfDTO = new CompraFuncionDTO(1,80,fdao.obtenerSucursalPorId(1).getHoraIniciaFuncion(),2,1);
+        CompraFuncionDAO cfDAO = new CompraFuncionDAO();
+        
         try {
-            fdao.guardarConTransacion(fdto);
+            System.out.println(fdao.obtenerSucursalPorId(1).getDia());
+            cfDAO.guardarConTransacion(cfDTO);
         } catch (PersistenciaException ex) {
             Logger.getLogger(CinepolisBDA.class.getName()).log(Level.SEVERE, null, ex);
         }

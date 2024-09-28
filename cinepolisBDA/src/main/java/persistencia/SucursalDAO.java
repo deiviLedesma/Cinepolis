@@ -102,7 +102,7 @@ public class SucursalDAO {
 
             rs.close();
             stmt.close();
-            conexionGeneral.close();
+           connection.close();
 
             return sucursal;
         }
