@@ -5,7 +5,7 @@
 package negocio;
 
 import dtos.ClienteDTO;
-import dtos.ClienteFiltroTablaDTO;
+import dtos.FiltroTablaDTO;
 import dtos.ClienteTablaDTO;
 import entidad.ClienteEntidad;
 import java.sql.SQLException;
@@ -32,7 +32,7 @@ public class ClienteService {
         this.clienteDAO = new ClienteDAO();
     }
     
-    public List<ClienteTablaDTO> buscarClientesTabla(ClienteFiltroTablaDTO filtro) throws NegocioException {
+    public List<ClienteTablaDTO> buscarClientesTabla(FiltroTablaDTO filtro) throws NegocioException {
         try {
             this.validarParametrosEnBuscarClienteTabla(filtro);
             int offset = this.obtenerOFFSETMySQL(filtro.getLimit(), filtro.getOffset());
@@ -155,7 +155,7 @@ public class ClienteService {
         return new Utilidades().RegresarOFFSETMySQL(limit, pagina);
     }
     
-    private void validarParametrosEnBuscarClienteTabla(ClienteFiltroTablaDTO filtro) throws NegocioException {
+    private void validarParametrosEnBuscarClienteTabla(FiltroTablaDTO filtro) throws NegocioException {
         if (this.esNumeroNegativo(filtro.getLimit())) {
             throw new NegocioException("El parametro limite no puede ser negativo");
         }

@@ -8,15 +8,15 @@ package dtos;
  *
  * @author filor
  */
-public class ClienteFiltroTablaDTO {
+public class FiltroTablaDTO {
      private int limit;
     private int offset;
     private String filtro;
 
-    public ClienteFiltroTablaDTO() {
+    public FiltroTablaDTO() {
     }
 
-    public ClienteFiltroTablaDTO(int limit, int offset, String filtro) {
+    public FiltroTablaDTO(int limit, int offset, String filtro) {
         this.limit = limit;
         this.offset = offset;
         this.filtro = filtro;
