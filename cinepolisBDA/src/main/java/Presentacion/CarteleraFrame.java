@@ -1,103 +1,124 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Presentacion;
 
 import dtos.PeliculaDTO;
-import dtos.SucursalDTO;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
+import persistencia.PeliculaDAO;
+import javax.swing.*;
+import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import persistencia.ConexionBD;
-import persistencia.IConexionBD;
-import persistencia.PeliculaDAO;
 
-/**
- *
- * @author SDavidLedesma
- */
 public class CarteleraFrame extends JFrame {
 
-    private JComboBox<SucursalDTO> sucursalComboBox;
-    private JPanel carteleraPanel;
-    private PeliculaDAO peliculaDAO;
+    private JComboBox<String> sucursalComboBox;
+    private JPanel peliculasPanel;
 
-    public CarteleraFrame(PeliculaDAO peliculaDAO, List<SucursalDTO> sucursales) {
-        this.peliculaDAO = peliculaDAO;
+    public CarteleraFrame() {
+        // Configuración del JFrame
         setTitle("Cartelera de Películas");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Crear ComboBox para sucursales
-        sucursalComboBox = new JComboBox<>();
-        for (SucursalDTO sucursal : sucursales) {
-            sucursalComboBox.addItem(sucursal);
-        }
-        sucursalComboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarPeliculasPorSucursal();
+        // Panel superior con JComboBox para seleccionar sucursal
+        JPanel sucursalPanel = new JPanel();
+        sucursalComboBox = new JComboBox<>(new String[]{"Sucursal 1", "Sucursal 2", "Sucursal 3"});  // Puedes cargar estas sucursales dinámicamente si lo deseas
+        sucursalComboBox.addActionListener(e -> cargarPeliculas());  // Al cambiar la sucursal, se cargan las películas
+        sucursalPanel.add(new JLabel("Selecciona la sucursal:"));
+        sucursalPanel.add(sucursalComboBox);
+
+        // Panel donde se mostrará la cartelera de películas
+        peliculasPanel = new JPanel();
+        peliculasPanel.setLayout(new GridLayout(2, 3));  // Muestra entre 3 y 6 películas
+        JScrollPane scrollPane = new JScrollPane(peliculasPanel);
+
+        // Agregar los paneles al JFrame
+        add(sucursalPanel, BorderLayout.NORTH);
+        add(scrollPane, BorderLayout.CENTER);
+    }
+
+    // Método para cargar las películas según la sucursal seleccionada
+    private void cargarPeliculas() {
+        peliculasPanel.removeAll();  // Limpiar el panel de películas
+        String sucursalSeleccionada = (String) sucursalComboBox.getSelectedItem();
+        int idSucursal = obtenerIdSucursal(sucursalSeleccionada);  // Método ficticio que obtiene el ID de la sucursal
+        try {
+            PeliculaDAO peliculaDAO = new PeliculaDAO();
+            List<PeliculaDTO> peliculas = peliculaDAO.obtenerPeliculasPorSucursal(idSucursal);
+
+            for (PeliculaDTO pelicula : peliculas) {
+                JPanel peliculaPanel = crearPeliculaPanel(pelicula);
+                peliculasPanel.add(peliculaPanel);
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al cargar las películas: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al cargar las películas: " + e.getMessage());
+        }
+
+        peliculasPanel.revalidate();  // Refrescar el panel
+        peliculasPanel.repaint();
+    }
+
+    // Método para crear un panel con la información de una película
+    private JPanel crearPeliculaPanel(PeliculaDTO pelicula) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        // Título de la película
+        JLabel tituloLabel = new JLabel(pelicula.getTitulo());
+        tituloLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        tituloLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Imagen de la película
+        JLabel imagenLabel = new JLabel();
+        ImageIcon imagen = obtenerImagenDesdeBaseDeDatos(pelicula.getImagen());
+        if (imagen != null) {
+            imagenLabel.setIcon(imagen);
+        } else {
+            imagenLabel.setText("No disponible");
+        }
+        imagenLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Sinopsis de la película
+        JTextArea sinopsisArea = new JTextArea(pelicula.getSinopsis());
+        sinopsisArea.setLineWrap(true);
+        sinopsisArea.setWrapStyleWord(true);
+        sinopsisArea.setEditable(false);
+        sinopsisArea.setMaximumSize(new Dimension(200, 100));
+
+        panel.add(tituloLabel);
+        panel.add(imagenLabel);
+        panel.add(sinopsisArea);
+
+        return panel;
+    }
+
+    // Método ficticio para obtener la imagen desde la base de datos
+    private ImageIcon obtenerImagenDesdeBaseDeDatos(String rutaImagen) {
+        // Aquí debes cargar la imagen desde MySQL usando la ruta almacenada
+        // Por ahora, cargamos la imagen desde el disco como ejemplo:
+        return new ImageIcon(getClass().getResource("/imagenes/" + rutaImagen));  // Supone que tienes una carpeta de imágenes
+    }
+
+    // Método ficticio para obtener el ID de la sucursal según el nombre
+    private int obtenerIdSucursal(String sucursalSeleccionada) {
+        // Debes implementar la lógica para obtener el ID de la sucursal con base en el nombre
+        // Por ahora, uso valores ficticios
+        switch (sucursalSeleccionada) {
+            case "Sucursal 1": return 1;
+            case "Sucursal 2": return 2;
+            case "Sucursal 3": return 3;
+            default: return 0;
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            CarteleraFrame frame = new CarteleraFrame();
+            frame.setVisible(true);
         });
-
-        add(sucursalComboBox, BorderLayout.NORTH);
-
-        // Panel para mostrar cartelera
-        carteleraPanel = new JPanel();
-        carteleraPanel.setLayout(new GridLayout(2, 3)); // 2 filas, 3 columnas
-        add(new JScrollPane(carteleraPanel), BorderLayout.CENTER);
-
-        cargarPeliculasPorSucursal(); // Cargar las películas al iniciar
     }
-
-    private void cargarPeliculasPorSucursal() {
-        SucursalDTO sucursalSeleccionada = (SucursalDTO) sucursalComboBox.getSelectedItem();
-        if (sucursalSeleccionada != null) {
-            try {
-                List<PeliculaDTO> peliculas = peliculaDAO.obtenerPeliculasPorSucursal(sucursalSeleccionada.getIdSucursal());
-                mostrarPeliculas(peliculas);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
-    private void mostrarPeliculas(List<PeliculaDTO> peliculas) {
-        carteleraPanel.removeAll(); // Limpiar panel
-
-        for (PeliculaDTO pelicula : peliculas) {
-            JPanel panelPelicula = new JPanel();
-            panelPelicula.setLayout(new BoxLayout(panelPelicula, BoxLayout.Y_AXIS));
-
-            // Cargar imagen desde la base de datos
-            ImageIcon imagenPelicula = new ImageIcon(pelicula.getImagen()); // Ruta de la imagen
-            JLabel lblImagen = new JLabel(new ImageIcon(imagenPelicula.getImage().getScaledInstance(120, 180, Image.SCALE_SMOOTH)));
-            JLabel lblTitulo = new JLabel(pelicula.getTitulo());
-            JLabel lblSinopsis = new JLabel("<html>" + pelicula.getSinopsis() + "</html>");
-
-            panelPelicula.add(lblImagen);
-            panelPelicula.add(lblTitulo);
-            panelPelicula.add(lblSinopsis);
-
-            carteleraPanel.add(panelPelicula);
-        }
-
-        carteleraPanel.revalidate();
-        carteleraPanel.repaint();
-    }
-
 }

@@ -54,44 +54,47 @@ public class RegisterFrom extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Nombre/s");
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel1.setText("Nombre/s");
 
+        jLabel2.setText("Apellido Materno");
         jLabel2.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel2.setText("Apellido Materno");
 
+        jLabel3.setText("Apellido Paterno");
         jLabel3.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel3.setText("Apellido Paterno");
 
+        jLabel4.setText("Ciudad");
         jLabel4.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel4.setText("Ciudad");
 
+        jLabel5.setText("Fecha Nacimiento");
         jLabel5.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel5.setText("Fecha Nacimiento");
 
+        jLabel6.setText("Correo");
         jLabel6.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel6.setText("Correo");
 
-        jPasswordField1.setText("jPasswordField1");
-
+        jLabel7.setText("Contraseña");
         jLabel7.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel7.setText("Contraseña");
 
+        btnAceptar.setText("Aceptar");
         btnAceptar.setBackground(new java.awt.Color(0, 0, 0));
         btnAceptar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
+        jLabel8.setText("Cinepolis");
         jLabel8.setFont(new java.awt.Font("Segoe UI Historic", 1, 48)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Cinepolis");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -189,6 +192,10 @@ public class RegisterFrom extends javax.swing.JFrame {
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,17 +4,41 @@
  */
 package Presentacion;
 
+import dtos.ClienteDTO;
+import dtos.CompraDTO;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.UUID;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import persistencia.CompraDAO;
+
 /**
  *
  * @author SDavidLedesma
  */
 public class PayFrame extends javax.swing.JFrame {
-
+    
+    CompraDAO compraDAO;
+    ClienteDTO clienteDTO;
+    
     /**
      * Creates new form PayFrame
      */
     public PayFrame() {
         initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        clienteDTO = new ClienteDTO();
+        compraDAO = new CompraDAO();
+    }
+    
+    public PayFrame(CompraDTO compra){
+        lblNombre = new JLabel(compra.getNombreCliente());
+        lblCorreo = new JLabel(compra.getCorreoCliente());
+        lblAsientosComprados = new JLabel(String.valueOf(compra.getCantidadAsientos()));
+        lblFecha = new JLabel(compra.getFechaHoraCompra().toString());
+        lblCodigo  = new JLabel(compra.getCodigoCompra());
     }
 
     /**
@@ -58,6 +82,11 @@ public class PayFrame extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         btnAceptarDetalles = new javax.swing.JButton();
+        lblNombre = new javax.swing.JLabel();
+        lblCorreo = new javax.swing.JLabel();
+        lblAsientosComprados = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
+        lblCodigo = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -80,11 +109,21 @@ public class PayFrame extends javax.swing.JFrame {
         btnEfectivo.setForeground(new java.awt.Color(102, 102, 102));
         btnEfectivo.setText("Efectivo");
         btnEfectivo.setBorder(null);
+        btnEfectivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEfectivoActionPerformed(evt);
+            }
+        });
 
         btnTarjeta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnTarjeta.setForeground(new java.awt.Color(102, 102, 102));
         btnTarjeta.setText("Tarjeta Crédito/Débito");
         btnTarjeta.setBorder(null);
+        btnTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTarjetaActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel3.setText("Cantidad de asientos");
@@ -129,6 +168,11 @@ public class PayFrame extends javax.swing.JFrame {
         btnAceptar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -260,6 +304,21 @@ public class PayFrame extends javax.swing.JFrame {
         btnAceptarDetalles.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAceptarDetalles.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptarDetalles.setText("Aceptar");
+        btnAceptarDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarDetallesActionPerformed(evt);
+            }
+        });
+
+        lblNombre.setText("jLabel16");
+
+        lblCorreo.setText("jLabel16");
+
+        lblAsientosComprados.setText("jLabel16");
+
+        lblFecha.setText("jLabel16");
+
+        lblCodigo.setText("jLabel16");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -278,7 +337,12 @@ public class PayFrame extends javax.swing.JFrame {
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAsientosComprados, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(94, 94, 94))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(127, Short.MAX_VALUE)
@@ -292,15 +356,25 @@ public class PayFrame extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addGap(34, 34, 34)
                 .addComponent(jLabel11)
-                .addGap(36, 36, 36)
+                .addGap(8, 8, 8)
+                .addComponent(lblNombre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel12)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblCorreo)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel13)
-                .addGap(46, 46, 46)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblAsientosComprados)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel14)
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFecha)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCodigo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(btnAceptarDetalles)
                 .addGap(19, 19, 19))
         );
@@ -359,6 +433,83 @@ public class PayFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnAceptarDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarDetallesActionPerformed
+         
+    }//GEN-LAST:event_btnAceptarDetallesActionPerformed
+
+    private void btnEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEfectivoActionPerformed
+        JOptionPane.showMessageDialog(null, "Has pagado con efectivo", "Pago", JOptionPane.INFORMATION_MESSAGE);
+         try {
+            // Obtener la cantidad de asientos del JTextField 
+            int cantidadAsientos = Integer.parseInt(txtAsientos.getText());
+
+            // Calcular el costo total en función de la cantidad
+            double costoTotal = cantidadAsientos * 65.0;
+
+            // Crear un DTO con la información de la compra
+            CompraDTO compra = new CompraDTO();
+            String codigoCompra = UUID.randomUUID().toString();
+            compra.setCodigoCompra(codigoCompra); 
+            compra.setFechaHoraCompra(LocalDateTime.now()); // Fecha y hora actual
+            compra.setNombreCliente(txtNombre.getText()); 
+            compra.setCorreoCliente(txtCorreo.getText());
+            compra.setCantidadAsientos(cantidadAsientos);
+            compra.setMetodoDePago("Efectivo"); // Método de pago "Efectivo"
+            compra.setCostoTotal(costoTotal);
+            compra.setIdCliente(clienteDTO.getIdCliente());
+
+            // Guardar la compra en la base de datos usando el DAO
+            int idCompra = compraDAO.guardarCompra(compra);
+
+            // Mostrar mensaje de confirmación
+            JOptionPane.showMessageDialog(null, "Has pagado con efectivo. Total: $" + costoTotal, "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la compra: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingresa una cantidad válida.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnEfectivoActionPerformed
+
+    private void btnTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarjetaActionPerformed
+         JOptionPane.showMessageDialog(null, "Has pagado con efectivo", "Pago", JOptionPane.INFORMATION_MESSAGE);
+         try {
+            // Obtener la cantidad de asientos del JTextField 
+            int cantidadAsientos = Integer.parseInt(txtAsientos.getText());
+
+            // Calcular el costo total en función de la cantidad
+            double costoTotal = cantidadAsientos * 65.0;
+
+            // Crear un DTO con la información de la compra
+            CompraDTO compra = new CompraDTO();
+            String codigoCompra = UUID.randomUUID().toString();
+            compra.setCodigoCompra(codigoCompra); 
+            compra.setFechaHoraCompra(LocalDateTime.now()); // Fecha y hora actual
+            compra.setNombreCliente(txtNombre.getText()); 
+            compra.setCorreoCliente(txtCorreo.getText());
+            compra.setCantidadAsientos(cantidadAsientos);
+            compra.setMetodoDePago("Tarjeta"); // Método de pago "Tarjeta"
+            compra.setCostoTotal(costoTotal);
+            compra.setIdCliente(clienteDTO.getIdCliente());
+
+            // Guardar la compra en la base de datos usando el DAO
+            int idCompra = compraDAO.guardarCompra(compra);
+
+            // Mostrar mensaje de confirmación
+            JOptionPane.showMessageDialog(null, "Has pagado con efectivo. Total: $" + costoTotal, "Pago Exitoso", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al realizar la compra: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingresa una cantidad válida.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnTarjetaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -423,8 +574,13 @@ public class PayFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblAsientos;
+    private javax.swing.JLabel lblAsientosComprados;
     private javax.swing.JLabel lblCantidad;
+    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblCorreo;
+    private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblHorario;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JTextField txtAsientos;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombre;

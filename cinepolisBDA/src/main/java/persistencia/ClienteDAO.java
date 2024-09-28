@@ -372,4 +372,44 @@ public class ClienteDAO implements IClienteDAO {
             }
         }
     }
+    
+    public ClienteEntidad buscarPorCorreo(String correo) throws PersistenciaException {
+    try {
+        ClienteEntidad cliente = null;
+        Connection conexion = this.conexionBD.obtenerConexion();
+
+        String codigoSQL = """
+                           SELECT
+                                idCliente,
+                                nombres,
+                                apellidoPaterno,
+                                apellidoMaterno,
+                                correoElectrónico,
+                                fechaNacimiento,
+                                ubicación,
+                                idCiudad,
+                                contraseña
+                           FROM clientes
+                           WHERE correoElectrónico = ?
+                           """;
+
+        PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
+        preparedStatement.setString(1, correo);
+
+        ResultSet resultado = preparedStatement.executeQuery();
+        if (resultado.next()) {
+            cliente = this.clienteEntidad(resultado);
+        }
+
+        resultado.close();
+        preparedStatement.close();
+        conexion.close();
+
+        return cliente;
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+        throw new PersistenciaException("Ocurrió un error al leer la base de datos.");
+    }
+}
+
 }

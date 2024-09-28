@@ -33,7 +33,7 @@ public class CompraDAO {
         this.conexionBD = conexionBD;
     }
 
-    private int guardarCompra(CompraDTO compra) throws SQLException {
+    public int guardarCompra(CompraDTO compra) throws SQLException {
         
         int idCompra = 0;
         String insertCompra = """
