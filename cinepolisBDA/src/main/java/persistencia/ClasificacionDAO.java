@@ -57,4 +57,16 @@ public class ClasificacionDAO {
     
     }
     
+       public void EliminarClasificacion(int idClasificacion) throws PersistenciaException, SQLException {
+
+        String eliminar = "DELETE FROM Clasificaciones  WHERE idClasificacion = ?";
+
+        try (Connection connection = conexionBD.obtenerConexion(); PreparedStatement stmt = connection.prepareStatement(eliminar)) {
+            stmt.setInt(1, idClasificacion);
+            stmt.executeUpdate();
+        }catch(SQLException e){
+            throw new PersistenciaException("No se pudo eliminar la clasificación porque no se encontró");
+        }
+    }
+    
 }

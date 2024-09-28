@@ -23,6 +23,7 @@ public class ConexionBD implements IConexionBD {
     @Override
     public Connection obtenerConexion() throws SQLException {
         return DriverManager.getConnection(CADENA_CONEXION, USUARIO, CONTRASENIA);
+
     }
 
 }
