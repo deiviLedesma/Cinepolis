@@ -10,31 +10,23 @@ import java.sql.Date;
  *
  * @author filor
  */
-public class ClienteDTO {
+public class ClienteTablaDTO {
     private int idCliente;
-    private String contrasenia;
-    private String correo;
     private String nombres;
     private String ApellidoPaterno;
     private String ApellidoMaterno;
     private Date fechaNacimiento;
-    private double x;
-    private double y;
     private int idCiudad;
 
-    public ClienteDTO() {
+    public ClienteTablaDTO() {
     }
 
-    public ClienteDTO(int idCliente, String contrasenia, String correo, String nombres, String ApellidoPaterno, String ApellidoMaterno, Date fechaNacimiento, double x, double y, int idCiudad) {
+    public ClienteTablaDTO(int idCliente, String nombres, String ApellidoPaterno, String ApellidoMaterno, Date fechaNacimiento, int idCiudad) {
         this.idCliente = idCliente;
-        this.contrasenia = contrasenia;
-        this.correo = correo;
         this.nombres = nombres;
         this.ApellidoPaterno = ApellidoPaterno;
         this.ApellidoMaterno = ApellidoMaterno;
         this.fechaNacimiento = fechaNacimiento;
-        this.x = x;
-        this.y = y;
         this.idCiudad = idCiudad;
     }
 
@@ -44,22 +36,6 @@ public class ClienteDTO {
 
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
     }
 
     public String getNombres() {
@@ -94,22 +70,6 @@ public class ClienteDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
     public int getIdCiudad() {
         return idCiudad;
     }
@@ -120,7 +80,7 @@ public class ClienteDTO {
 
     @Override
     public String toString() {
-        return "ClienteDTO{" + "idCliente=" + idCliente + ", nombres=" + nombres + ", ApellidoPaterno=" + ApellidoPaterno + '}';
+        return "ClienteTablaDTO{" + "idCliente=" + idCliente + ", nombres=" + nombres + ", ApellidoPaterno=" + ApellidoPaterno + '}';
     }
     
     

@@ -5,6 +5,8 @@
 package persistencia;
 
 import dtos.ClienteDTO;
+import dtos.ClienteFiltroTablaDTO;
+import dtos.ClienteTablaDTO;
 import entidad.ClienteEntidad;
 import java.sql.Connection;
 import java.sql.Date;
@@ -12,13 +14,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import utilerias.Encriptador;
 
 /**
  *
  * @author filor
  */
-public class ClienteDAO {
+public class ClienteDAO implements IClienteDAO {
 
     private IConexionBD conexionBD;
     private Connection conexionGeneral;
@@ -30,7 +34,103 @@ public class ClienteDAO {
     public ClienteDAO(IConexionBD conexionBD) {
         this.conexionBD = conexionBD;
     }
+    
+    @Override
+    public List<ClienteTablaDTO> buscarClientesTabla(ClienteFiltroTablaDTO filtro) throws PersistenciaException {
+        try {
+            List<ClienteTablaDTO> clienteLista = null;
+            Connection conexion = this.conexionBD.obtenerConexion();
 
+            String codigoSQL = """
+                               SELECT
+                                    idCliente,
+                                    nombres,
+                                    apellidoPaterno,
+                                    apellidoMaterno,
+                                    fechaNacimiento,
+                                    idCiudad
+                                FROM clientes
+                                WHERE CONCAT(nombres, ' ', apellidoPaterno, ' ', apellidoMaterno) LIKE ?
+                                LIMIT ? 
+                                OFFSET ?
+                               """;
+
+            PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
+            preparedStatement.setString(1, "%" + filtro.getFiltro() + "%");
+            preparedStatement.setInt(2, filtro.getLimit());
+            preparedStatement.setInt(3, filtro.getOffset());
+
+            ResultSet resultado = preparedStatement.executeQuery();
+            while (resultado.next()) {
+                if (clienteLista == null) {
+                    clienteLista = new ArrayList<>();
+                }
+                clienteLista.add(this.clienteTablaDTO(resultado));
+            }
+
+            resultado.close();
+            preparedStatement.close();
+            conexion.close();
+
+            return clienteLista;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
+        }
+    }
+
+    @Override
+    public ClienteEntidad guardar(ClienteDTO cliente) throws PersistenciaException {
+        try {
+            Connection conexion = this.conexionBD.obtenerConexion();
+            String insertCliente = """
+                                    INSERT INTO clientes (nombres,
+                                   apellidoPaterno,
+                                   apellidoMaterno,
+                                   correoElectrónico,
+                                   fechaNacimiento,
+                                   ubicación,
+                                   idCiudad,
+                                   contraseña)
+                                                 VALUES (?,?,?,?,?,POINT(?,?),?,?);
+                                    """;
+
+            PreparedStatement preparedStatement = conexion.prepareStatement(insertCliente, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, cliente.getNombres());
+            preparedStatement.setString(2, cliente.getApellidoPaterno());
+            preparedStatement.setString(3, cliente.getApellidoMaterno());
+            preparedStatement.setString(4, cliente.getCorreo());
+            preparedStatement.setDate(5, cliente.getFechaNacimiento());
+            preparedStatement.setDouble(6, cliente.getX());
+            preparedStatement.setDouble(7, cliente.getY());
+            preparedStatement.setInt(8, cliente.getIdCiudad());
+            preparedStatement.setString(9, cliente.getContrasenia());
+
+
+            int filasAfectadas = preparedStatement.executeUpdate();
+            if (filasAfectadas == 0) {
+                throw new PersistenciaException("La inserción del cliente falló, no se pudo insertar el registro.");
+            }
+
+            int idCliente = 0;
+            ResultSet resultado = preparedStatement.getGeneratedKeys();
+            if (resultado.next()) {
+                idCliente = (resultado.getInt(1));
+            }
+
+            resultado.close();
+            preparedStatement.close();
+            conexion.close();
+
+            return this.buscarPorId(idCliente);
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
+        }
+    }
+    
+    @Override
     public ClienteEntidad buscarPorId(int id) throws PersistenciaException {
         try {
             ClienteEntidad cliente = null;
@@ -70,7 +170,8 @@ public class ClienteDAO {
         }
     }
 
-    private int GuardarCliente(ClienteDTO cliente) throws SQLException {
+    @Override
+    public int GuardarCliente(ClienteDTO cliente) throws SQLException {
         int idCliente = 0;
         String insertCliente = """
                                     INSERT INTO clientes (nombres,
@@ -135,6 +236,7 @@ public class ClienteDAO {
         }
     }
 
+    @Override
     public ClienteEntidad eliminar(int idCliente) throws PersistenciaException {
         try {
 
@@ -176,6 +278,7 @@ public class ClienteDAO {
         }
     }
 
+    @Override
     public ClienteEntidad modificar(ClienteDTO cliente) throws PersistenciaException {
         try {
 
@@ -242,18 +345,17 @@ public class ClienteDAO {
 //        LocalDateTime fechaHoraRegistro = resultado.getTimestamp("fechaHoraRegistro").toLocalDateTime();
         return new ClienteEntidad(id, contraseña, correo, nombre, paterno, materno, fechaNacimiento, 12, 12, idCiudad);
     }
-
-    public void EliminarCliente(int idCliente) throws PersistenciaException, SQLException {
-
-        String eliminar = "DELETE FROM Clientes  WHERE idCliente = ?";
-
-        try (Connection connection = conexionBD.obtenerConexion(); PreparedStatement stmt = connection.prepareStatement(eliminar)) {
-            stmt.setInt(1, idCliente);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new PersistenciaException("No se pudo eliminar el Cliente porque no se encontró");
-        }
+    
+    private ClienteTablaDTO clienteTablaDTO(ResultSet resultado) throws SQLException {
+        int id = resultado.getInt("idCliente");
+        String nombre = resultado.getString("nombres");
+        String paterno = resultado.getString("apellidoPaterno");
+        String materno = resultado.getString("apellidoMaterno");
+        Date fechaNacimiento = resultado.getDate("fechaNacimiento");
+        int idCiudad = resultado.getInt("idCiudad");
+        return new ClienteTablaDTO(id, nombre, paterno, materno, fechaNacimiento,idCiudad);
     }
+
 
     public boolean validarCliente(String correo, String password) throws SQLException {
         String sql = "SELECT contraseña FROM Clientes WHERE correoElectrónico = ?";

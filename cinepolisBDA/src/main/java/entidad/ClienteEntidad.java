@@ -123,5 +123,10 @@ public class ClienteEntidad {
         this.idCiudad = idCiudad;
     }
 
+    @Override
+    public String toString() {
+        return "ClienteEntidad{" + "idCliente=" + idCliente + ", nombres=" + nombres + ", ApellidoPaterno=" + ApellidoPaterno + '}';
+    }
+
     
 }

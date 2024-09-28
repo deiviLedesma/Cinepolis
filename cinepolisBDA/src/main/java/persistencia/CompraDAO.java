@@ -34,6 +34,7 @@ public class CompraDAO {
     }
 
     private int guardarCompra(CompraDTO compra) throws SQLException {
+        
         int idCompra = 0;
         String insertCompra = """
                                     INSERT INTO compras (codigoCompra,
@@ -55,7 +56,6 @@ public class CompraDAO {
             preparedStatement.setString(6, compra.getMetodoDePago());
             preparedStatement.setDouble(7, compra.getCostoTotal());
             preparedStatement.setInt(8, compra.getIdCliente());
-
             preparedStatement.executeUpdate();
 
             try (ResultSet resultado = preparedStatement.getGeneratedKeys()) {
@@ -64,6 +64,7 @@ public class CompraDAO {
                 }
             }
         }
+        System.out.println(idCompra);
         return idCompra;
     }
 
