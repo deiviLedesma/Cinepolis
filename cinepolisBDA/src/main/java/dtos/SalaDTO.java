@@ -75,6 +75,11 @@ public class SalaDTO {
     public void setIdSucursal(int idSucursal) {
         this.idSucursal = idSucursal;
     }
+
+    @Override
+    public String toString() {
+        return "SalaDTO{" + "idSala=" + idSala + ", nombre=" + nombre + ", precioActual=" + precioActual + ", idSucursal=" + idSucursal + '}';
+    }
     
     
 }

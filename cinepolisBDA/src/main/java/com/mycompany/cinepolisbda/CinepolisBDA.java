@@ -4,7 +4,7 @@
 package com.mycompany.cinepolisbda;
 
 import dtos.ClienteDTO;
-import dtos.ClienteFiltroTablaDTO;
+import dtos.FiltroTablaDTO;
 import dtos.CompraDTO;
 import dtos.CompraFuncionDTO;
 import dtos.FuncionDTO;
@@ -63,7 +63,7 @@ public class CinepolisBDA {
 //        }
         
         ClienteDAO cliente = new ClienteDAO();
-        ClienteFiltroTablaDTO filtro = new ClienteFiltroTablaDTO(5,0,"");
+        FiltroTablaDTO filtro = new FiltroTablaDTO(5,0,"");
         
         try {
             for (int i = 0; i < cs.buscarClientesTabla(filtro).size(); i++) {

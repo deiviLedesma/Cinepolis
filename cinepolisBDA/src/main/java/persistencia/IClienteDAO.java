@@ -5,7 +5,7 @@
 package persistencia;
 
 import dtos.ClienteDTO;
-import dtos.ClienteFiltroTablaDTO;
+import dtos.FiltroTablaDTO;
 import dtos.ClienteTablaDTO;
 import entidad.ClienteEntidad;
 import java.sql.SQLException;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface IClienteDAO {
     
-    public List<ClienteTablaDTO> buscarClientesTabla(ClienteFiltroTablaDTO filtro) throws PersistenciaException;
+    public List<ClienteTablaDTO> buscarClientesTabla(FiltroTablaDTO filtro) throws PersistenciaException;
     
     public ClienteEntidad guardar(ClienteDTO cliente) throws PersistenciaException;
             

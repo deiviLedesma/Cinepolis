@@ -5,7 +5,7 @@
 package persistencia;
 
 import dtos.ClienteDTO;
-import dtos.ClienteFiltroTablaDTO;
+import dtos.FiltroTablaDTO;
 import dtos.ClienteTablaDTO;
 import entidad.ClienteEntidad;
 import java.sql.Connection;
@@ -36,7 +36,7 @@ public class ClienteDAO implements IClienteDAO {
     }
     
     @Override
-    public List<ClienteTablaDTO> buscarClientesTabla(ClienteFiltroTablaDTO filtro) throws PersistenciaException {
+    public List<ClienteTablaDTO> buscarClientesTabla(FiltroTablaDTO filtro) throws PersistenciaException {
         try {
             List<ClienteTablaDTO> clienteLista = null;
             Connection conexion = this.conexionBD.obtenerConexion();
