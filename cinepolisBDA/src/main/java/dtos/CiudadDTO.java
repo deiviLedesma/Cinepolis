@@ -55,6 +55,11 @@ public class CiudadDTO {
     public void setIdPais(int idPais) {
         this.idPais = idPais;
     }
+
+    @Override
+    public String toString() {
+        return "CiudadDTO{" + "idCiudad=" + idCiudad + ", nombre=" + nombre + ", numeroHabitantes=" + numeroHabitantes + ", idPais=" + idPais + '}';
+    }
     
     
 }

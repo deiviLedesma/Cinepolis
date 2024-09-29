@@ -42,5 +42,10 @@ public class PaisDTO {
     public void setNumeroHabitantes(int numeroHabitantes) {
         this.numeroHabitantes = numeroHabitantes;
     }
+
+    @Override
+    public String toString() {
+        return "PaisDTO{" + "idPais=" + idPais + ", nombre=" + nombre + ", numeroHabitantes=" + numeroHabitantes + '}';
+    }
     
 }

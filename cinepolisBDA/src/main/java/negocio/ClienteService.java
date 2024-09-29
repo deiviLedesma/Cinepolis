@@ -21,7 +21,7 @@ import utilerias.Utilidades;
  *
  * @author filor
  */
-public class ClienteService {
+public class ClienteService implements IClienteService{
     private IClienteDAO clienteDAO;
 
     public ClienteService(IClienteDAO clienteDAO) {
@@ -32,6 +32,7 @@ public class ClienteService {
         this.clienteDAO = new ClienteDAO();
     }
     
+    @Override
     public List<ClienteTablaDTO> buscarClientesTabla(FiltroTablaDTO filtro) throws NegocioException {
         try {
             this.validarParametrosEnBuscarClienteTabla(filtro);
@@ -49,6 +50,7 @@ public class ClienteService {
         }
     }
     
+    @Override
     public ClienteDTO buscarPorId(int id) throws NegocioException {
         try {
             if (id <= 0) {
@@ -65,7 +67,25 @@ public class ClienteService {
         }
     }
     
+    @Override
+    public ClienteDTO buscarPorCorreo(String correo) throws NegocioException {
+        try {
+            if (correo == null) {
+                throw new NegocioException("Ingresar un correo");
+            }
+            ClienteEntidad clienteBuscado = this.clienteDAO.buscarPorCorreo(correo);
+            System.out.println(clienteBuscado);
+            ClienteDTO clienteDTO = this.convertirAClienteDTO(clienteBuscado);
+            System.out.println(clienteDTO);
+            return clienteDTO;
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
+    }
     
+    
+    @Override
     public ClienteDTO guardar(ClienteDTO cliente) throws NegocioException, SQLException {
         try {
             this.validarCampos(cliente);
@@ -77,6 +97,7 @@ public class ClienteService {
         }
     }
     
+    @Override
     public ClienteDTO modificar(ClienteDTO cliente) throws NegocioException {
         try {
             this.validarCampos(cliente);
@@ -92,6 +113,7 @@ public class ClienteService {
         }
     }
     
+    @Override
     public ClienteDTO eliminar(int id) throws NegocioException {
         try {
             if (id <= 0) {

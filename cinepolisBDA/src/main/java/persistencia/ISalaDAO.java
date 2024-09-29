@@ -4,9 +4,11 @@
  */
 package persistencia;
 
+import dtos.FiltroTablaDTO;
 import dtos.SalaDTO;
 import entidad.SalaEntidad;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -23,4 +25,5 @@ public interface ISalaDAO {
     
     SalaEntidad guardarConTransacion(SalaDTO sala) throws PersistenciaException;
     
+    List<SalaDTO> buscarSalaTabla(FiltroTablaDTO filtro) throws PersistenciaException;
 }

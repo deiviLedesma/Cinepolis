@@ -24,6 +24,7 @@ public class CiudadEntidad {
         this.idPais = idPais;
     }
 
+    
     public int getIdCiudad() {
         return idCiudad;
     }

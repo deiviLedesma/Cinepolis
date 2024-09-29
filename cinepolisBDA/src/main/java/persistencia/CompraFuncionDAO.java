@@ -19,7 +19,7 @@ import java.sql.Time;
  *
  * @author filor
  */
-public class CompraFuncionDAO {
+public class CompraFuncionDAO implements ICompraFuncionDAO{
 
     private IConexionBD conexionBD;
     private Connection conexionGeneral;
@@ -32,7 +32,8 @@ public class CompraFuncionDAO {
         this.conexionBD = conexionBD;
     }
 
-    private int guardarCompraFuncion(CompraFuncionDTO compra) throws SQLException {
+    @Override
+    public int guardarCompraFuncion(CompraFuncionDTO compra) throws SQLException {
         int id = 0;
         String insertCliente = """
                                     INSERT INTO compras_funciones (precio,
@@ -58,6 +59,7 @@ public class CompraFuncionDAO {
         return id;
     }
 
+    @Override
     public CompraFuncionEntidad guardarConTransacion(CompraFuncionDTO compra) throws PersistenciaException {
         try {
             this.conexionGeneral = this.conexionBD.obtenerConexion();
@@ -87,6 +89,7 @@ public class CompraFuncionDAO {
         }
     }
 
+    @Override
     public CompraFuncionEntidad obtenerCompraPorId(int id) throws SQLException {
         CompraFuncionEntidad compra = null;
         String sql = """ 

@@ -115,10 +115,16 @@ public class MenuPrincipalFrame extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
+        LoginFrame login = new LoginFrame();
+        login.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         // TODO add your handling code here:
+        RegisterFrom register = new RegisterFrom();
+        register.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     /**

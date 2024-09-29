@@ -343,7 +343,7 @@ public class ClienteDAO implements IClienteDAO {
 
 //        boolean estatus = resultado.getBoolean("estaEliminado");
 //        LocalDateTime fechaHoraRegistro = resultado.getTimestamp("fechaHoraRegistro").toLocalDateTime();
-        return new ClienteEntidad(id, contraseña, correo, nombre, paterno, materno, fechaNacimiento, 12, 12, idCiudad);
+        return new ClienteEntidad(id, contraseña, correo, nombre, paterno, materno, fechaNacimiento,idCiudad);
     }
     
     private ClienteTablaDTO clienteTablaDTO(ResultSet resultado) throws SQLException {
@@ -373,6 +373,7 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
     
+    @Override
     public ClienteEntidad buscarPorCorreo(String correo) throws PersistenciaException {
     try {
         ClienteEntidad cliente = null;

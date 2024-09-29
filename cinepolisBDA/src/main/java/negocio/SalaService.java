@@ -6,10 +6,12 @@ package negocio;
 
 import dtos.ClienteDTO;
 import dtos.FiltroTablaDTO;
+import dtos.FuncionDTO;
 import dtos.SalaDTO;
 import entidad.ClienteEntidad;
 import entidad.SalaEntidad;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import persistencia.ISalaDAO;
@@ -30,6 +32,23 @@ public class SalaService {
 
     public SalaService(ISalaDAO salaDAO) {
         this.salaDAO = salaDAO;
+    }
+    
+    public List<SalaDTO> buscarFuncionesTabla(FiltroTablaDTO filtro) throws NegocioException {
+        try {
+            this.validarParametrosEnBuscarTabla(filtro);
+            int offset = this.obtenerOFFSETMySQL(filtro.getLimit(), filtro.getOffset());
+            filtro.setOffset(offset);
+
+            List<SalaDTO> lista = this.salaDAO.buscarSalaTabla(filtro);
+            if (lista == null) {
+                throw new NegocioException("No se encontraron registros con los filtros");
+            }
+            return lista;
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
     }
     
     public SalaDTO buscarPorId(int id) throws NegocioException, SQLException {
@@ -119,7 +138,7 @@ public class SalaService {
         return new Utilidades().RegresarOFFSETMySQL(limit, pagina);
     }
     
-    private void validarParametrosEnBuscarClienteTabla(FiltroTablaDTO filtro) throws NegocioException {
+    private void validarParametrosEnBuscarTabla(FiltroTablaDTO filtro) throws NegocioException {
         if (this.esNumeroNegativo(filtro.getLimit())) {
             throw new NegocioException("El parametro limite no puede ser negativo");
         }
