@@ -15,7 +15,7 @@ import java.util.List;
  * @author filor
  */
 public interface ISalaDAO {
-    SalaEntidad actualizarSala(SalaEntidad sala) throws SQLException;
+    SalaEntidad actualizarSala(SalaDTO sala) throws SQLException;
     
     SalaEntidad eliminarSala(int idSala) throws PersistenciaException;
     

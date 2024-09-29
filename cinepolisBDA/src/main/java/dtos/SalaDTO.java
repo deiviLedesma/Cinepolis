@@ -28,6 +28,21 @@ public class SalaDTO {
         this.idSucursal = idSucursal;
     }
 
+    public SalaDTO(String nombre, int asientosDisponibles, int tiempoLimpiezaEnMinutos, float precioActual) {
+        this.nombre = nombre;
+        this.asientosDisponibles = asientosDisponibles;
+        this.tiempoLimpiezaEnMinutos = tiempoLimpiezaEnMinutos;
+        this.precioActual = precioActual;
+    }
+
+    public SalaDTO(String nombre, int asientosDisponibles, int tiempoLimpiezaEnMinutos, float precioActual, int idSucursal) {
+        this.nombre = nombre;
+        this.asientosDisponibles = asientosDisponibles;
+        this.tiempoLimpiezaEnMinutos = tiempoLimpiezaEnMinutos;
+        this.precioActual = precioActual;
+        this.idSucursal = idSucursal;
+    }
+
     public int getIdSala() {
         return idSala;
     }

@@ -23,7 +23,7 @@ import utilerias.Utilidades;
  *
  * @author filor
  */
-public class SalaService {
+public class SalaService implements ISalaService {
     private ISalaDAO salaDAO;
 
     public SalaService() {
@@ -34,7 +34,8 @@ public class SalaService {
         this.salaDAO = salaDAO;
     }
     
-    public List<SalaDTO> buscarFuncionesTabla(FiltroTablaDTO filtro) throws NegocioException {
+    @Override
+    public List<SalaDTO> buscarSalasTabla(FiltroTablaDTO filtro) throws NegocioException {
         try {
             this.validarParametrosEnBuscarTabla(filtro);
             int offset = this.obtenerOFFSETMySQL(filtro.getLimit(), filtro.getOffset());
@@ -51,6 +52,7 @@ public class SalaService {
         }
     }
     
+    @Override
     public SalaDTO buscarPorId(int id) throws NegocioException, SQLException {
         if (id <= 0) {
             throw new NegocioException("El id recibido es incorrecto");
@@ -62,6 +64,7 @@ public class SalaService {
         return salaDTO;
     }
     
+    @Override
     public SalaDTO guardar(SalaDTO sala) throws NegocioException, SQLException {
         try {
             this.validarCampos(sala);
@@ -73,17 +76,19 @@ public class SalaService {
         }
     }
     
+    @Override
     public SalaDTO modificar(SalaDTO sala) throws NegocioException, SQLException {
         this.validarCampos(sala);
         SalaEntidad salaBuscada = this.salaDAO.obtenerSalaPorId(sala.getIdSala());
         if (salaBuscada == null) {
             throw new NegocioException("No se pudo obtener la sala con los parametros ingresados");
         }
-        SalaEntidad salaModificada = this.salaDAO.actualizarSala(salaBuscada);
+        SalaEntidad salaModificada = this.salaDAO.actualizarSala(sala);
         System.out.println(salaModificada);
         return this.convertirASalaDTO(salaModificada);
     }
     
+    @Override
     public SalaDTO eliminar(int id) throws NegocioException {
         try {
             if (id <= 0) {
