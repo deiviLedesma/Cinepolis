@@ -27,6 +27,7 @@ public class AdminViewFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         btnClientes = new javax.swing.JButton();
+        btnSala = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,6 +38,13 @@ public class AdminViewFrame extends javax.swing.JFrame {
             }
         });
 
+        btnSala.setText("Sala");
+        btnSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -44,13 +52,17 @@ public class AdminViewFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(btnClientes)
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addGap(58, 58, 58)
+                .addComponent(btnSala)
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(260, Short.MAX_VALUE)
-                .addComponent(btnClientes)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClientes)
+                    .addComponent(btnSala))
                 .addGap(17, 17, 17))
         );
 
@@ -61,6 +73,12 @@ public class AdminViewFrame extends javax.swing.JFrame {
         frmAdminClienteCrud clientes = new frmAdminClienteCrud();
         clientes.setVisible(true);
     }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalaActionPerformed
+        // TODO add your handling code here:
+        frmAdminSalaCrud salas = new frmAdminSalaCrud();
+        salas.setVisible(true);
+    }//GEN-LAST:event_btnSalaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,5 +117,6 @@ public class AdminViewFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnSala;
     // End of variables declaration//GEN-END:variables
 }

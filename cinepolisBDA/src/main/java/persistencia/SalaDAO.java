@@ -75,14 +75,14 @@ public class SalaDAO implements ISalaDAO {
     }
     
     @Override
-    public SalaEntidad actualizarSala(SalaEntidad sala) throws SQLException {
-        String sql = "UPDATE Salas SET nombre = ?, capacidadAsientos = ?, idSucursal = ?,  WHERE idSala = ?";
+    public SalaEntidad actualizarSala(SalaDTO sala) throws SQLException {
+        String sql = "UPDATE salas SET nombre = ?, capacidadAsientos = ?,precioActual =?,tiempoDeLimpiezaMinutos =?  WHERE idSala = ?";
         try (Connection connection = conexionBD.obtenerConexion(); PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, sala.getNombre());
             stmt.setInt(2, sala.getAsientosDisponibles());
-            stmt.setInt(3, sala.getIdSucursal());
-            //stmt.setInt(4, sala.getIdTipoDeSala());
-            stmt.setInt(4, sala.getIdSala());
+            stmt.setFloat(3, sala.getPrecioActual());
+            stmt.setInt(4, sala.getTiempoLimpiezaEnMinutos());
+            stmt.setInt(5, sala.getIdSala());
             stmt.executeUpdate();
             
             int filasAfectadas = stmt.executeUpdate();
@@ -93,7 +93,8 @@ public class SalaDAO implements ISalaDAO {
             // Cerramos el PreparedStatement y la conexión a la base de datos
             stmt.close();
             connection.close();
-
+            
+            
             return this.obtenerSalaPorId(sala.getIdSala());
         }
 
@@ -112,7 +113,7 @@ public class SalaDAO implements ISalaDAO {
             Connection conexion = this.conexionBD.obtenerConexion();
 
             // Definimos la consulta SQL para actualizar un cliente en la tabla 'clientes'
-            String sql = "DELETE FROM Salas WHERE idPelicula = ?";
+            String sql = "DELETE FROM Salas WHERE idSala = ?";
 
             // Creamos un objeto PreparedStatement para ejecutar la consulta de actualización
             PreparedStatement preparedStatement = conexion.prepareStatement(sql);
@@ -156,7 +157,7 @@ public class SalaDAO implements ISalaDAO {
             preparedStatement.setInt(2, sala.getAsientosDisponibles());
             preparedStatement.setInt(3, sala.getTiempoLimpiezaEnMinutos());
             preparedStatement.setFloat(4,(float)sala.getPrecioActual());
-            preparedStatement.setInt(5, sala.getIdSala());
+            preparedStatement.setInt(5, sala.getIdSucursal());
 
             int filasAfectadas = preparedStatement.executeUpdate();
             if (filasAfectadas == 0) {
