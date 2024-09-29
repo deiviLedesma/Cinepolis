@@ -6,6 +6,7 @@ package persistencia;
 
 import dtos.ClasificacionDTO;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -15,4 +16,6 @@ public interface IClasificacionDAO {
     void insertarClasificacion(ClasificacionDTO clasificacion)throws PersistenciaException;
     
     void EliminarClasificacion(int idClasificacion) throws PersistenciaException, SQLException;
+    
+    List<ClasificacionDTO> buscarClasificacionTabla() throws PersistenciaException;
 }

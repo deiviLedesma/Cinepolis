@@ -5,6 +5,7 @@
 package persistencia;
 
 import dtos.CiudadDTO;
+import java.util.List;
 
 /**
  *
@@ -12,4 +13,7 @@ import dtos.CiudadDTO;
  */
 public interface ICiudadDAO {
     void insertarCiudad(CiudadDTO ciudad)throws PersistenciaException;
+    
+    List<CiudadDTO> buscarCiudadTabla() throws PersistenciaException;
+            
 }

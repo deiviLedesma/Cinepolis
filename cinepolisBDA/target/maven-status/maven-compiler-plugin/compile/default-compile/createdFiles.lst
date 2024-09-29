@@ -21,6 +21,7 @@ Negocio\NegocioException.class
 utilerias\Encriptador.class
 persistencia\PeliculaDAO.class
 persistencia\IPeliculaDAO.class
+Negocio\PaisService.class
 persistencia\ClienteDAO.class
 dtos\CompraDTO.class
 dtos\SucursalDTO.class
@@ -30,6 +31,7 @@ persistencia\CompraFuncionDAO.class
 entidad\PeliculaEntidad.class
 persistencia\ISucursalDAO.class
 entidad\GeneroEntidad.class
+Negocio\CiudadService.class
 dtos\GeneroDTO.class
 persistencia\IConexionBD.class
 persistencia\IFuncionDAO.class
@@ -54,8 +56,10 @@ persistencia\SalaDAO.class
 persistencia\ClasificacionDAO.class
 Presentacion\LoginFrame$2.class
 Presentacion\RegisterFrom.class
+Negocio\GeneroService.class
 entidad\CompraEntidad.class
 entidad\PaisEntidad.class
+Negocio\ClasificacionService.class
 utilerias\JButtonCell.class
 entidad\SucursalEntidad.class
 utilerias\JButtonRenderer.class

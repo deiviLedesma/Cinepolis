@@ -5,12 +5,15 @@
 package persistencia;
 
 import dtos.ClasificacionDTO;
+import dtos.PaisDTO;
 import entidad.ClasificacionEntidad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -25,6 +28,40 @@ public class ClasificacionDAO implements IClasificacionDAO {
 
     public ClasificacionDAO(IConexionBD conexionBD) {
         this.conexionBD = conexionBD;
+    }
+    
+    @Override
+    public List<ClasificacionDTO> buscarClasificacionTabla() throws PersistenciaException {
+        try {
+            List<ClasificacionDTO> lista = null;
+            Connection conexion = this.conexionBD.obtenerConexion();
+
+            String codigoSQL = """
+                               SELECT
+                               idClasificacion,
+                               nombre
+                                FROM clasificaciones
+                               """;
+
+            PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
+
+            ResultSet resultado = preparedStatement.executeQuery();
+            while (resultado.next()) {
+                if (lista == null) {
+                    lista = new ArrayList<>();
+                }
+                lista.add(this.funcionTablaDTO(resultado));
+            }
+
+            resultado.close();
+            preparedStatement.close();
+            conexion.close();
+
+            return lista;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
+        }
     }
     
     @Override
@@ -71,4 +108,9 @@ public class ClasificacionDAO implements IClasificacionDAO {
         }
     }
     
+       private ClasificacionDTO funcionTablaDTO(ResultSet rs) throws SQLException {
+        int id = rs.getInt("idClasificacion");
+        String nombre = rs.getString("nombre");
+        return new ClasificacionDTO(id,nombre);
+    }
 }

@@ -5,6 +5,7 @@
 package persistencia;
 
 import dtos.PaisDTO;
+import java.util.List;
 
 /**
  *
@@ -12,4 +13,6 @@ import dtos.PaisDTO;
  */
 public interface IPaisDAO {
     void insertarPais(PaisDTO paisEntidad) throws PersistenciaException;
+    
+    List<PaisDTO> buscarPaisTabla() throws PersistenciaException;
 }

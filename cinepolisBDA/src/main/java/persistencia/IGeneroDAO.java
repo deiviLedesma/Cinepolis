@@ -5,6 +5,7 @@
 package persistencia;
 
 import dtos.GeneroDTO;
+import java.util.List;
 
 /**
  *
@@ -13,5 +14,5 @@ import dtos.GeneroDTO;
 public interface IGeneroDAO {
     void insertarGenero(GeneroDTO genero)throws PersistenciaException;
     
-    
+    List<GeneroDTO> buscarGeneroTabla() throws PersistenciaException;
 }

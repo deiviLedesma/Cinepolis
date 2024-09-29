@@ -26,9 +26,13 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import negocio.CiudadService;
+import negocio.ClasificacionService;
 import negocio.ClienteService;
 import negocio.FuncionService;
+import negocio.GeneroService;
 import negocio.NegocioException;
+import negocio.PaisService;
 import negocio.SalaService;
 import persistencia.CiudadDAO;
 import persistencia.ClasificacionDAO;
@@ -70,13 +74,22 @@ public class CinepolisBDA {
         FuncionService fs = new FuncionService();
         
         SalaService ss = new SalaService();
+        CiudadService ciudad = new CiudadService();
         
+        GeneroService genero = new GeneroService();
+        ClasificacionService clasificacion = new ClasificacionService();
+        PaisService pais = new PaisService();
         try {
-            for (int i = 0; i < ss.buscarFuncionesTabla(filtro).size(); i++) {
-                System.out.println(ss.buscarFuncionesTabla(filtro).get(i));
+                System.out.println(ciudad.buscarCiudadesTabla().get(0));
+            for (int i = 0; i < 2; i++) {
+                System.out.println(pais.buscarCiudadesTabla().get(i));
+                System.out.println(genero.buscarClasificacionTabla().get(i));
+                System.out.println(clasificacion.buscarClasificacionTabla().get(i));
             }
             
         } catch (NegocioException ex) {
+            Logger.getLogger(CinepolisBDA.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (PersistenciaException ex) {
             Logger.getLogger(CinepolisBDA.class.getName()).log(Level.SEVERE, null, ex);
         }
         
