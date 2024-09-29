@@ -5,6 +5,8 @@
 package persistencia;
 
 import dtos.ClienteDTO;
+import dtos.FiltroTablaDTO;
+import dtos.FuncionDTO;
 import dtos.SalaDTO;
 import entidad.ClienteEntidad;
 import entidad.SalaEntidad;
@@ -13,6 +15,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -27,6 +32,48 @@ public class SalaDAO implements ISalaDAO {
         this.conexionBD = new ConexionBD();
     }
 
+    @Override
+    public List<SalaDTO> buscarSalaTabla(FiltroTablaDTO filtro) throws PersistenciaException {
+        try {
+            List<SalaDTO> lista = null;
+            Connection conexion = this.conexionBD.obtenerConexion();
+
+            String codigoSQL = """
+                               SELECT
+                                    idSala,
+                                    nombre,
+                                    capacidadAsientos,
+                                    tiempoDeLimpiezaMinutos,
+                                    precioActual,
+                                    idSucursal
+                                FROM salas
+                                LIMIT ? 
+                                OFFSET ?
+                               """;
+
+            PreparedStatement preparedStatement = conexion.prepareStatement(codigoSQL);
+            preparedStatement.setInt(1, filtro.getLimit());
+            preparedStatement.setInt(2, filtro.getOffset());
+
+            ResultSet resultado = preparedStatement.executeQuery();
+            while (resultado.next()) {
+                if (lista == null) {
+                    lista = new ArrayList<>();
+                }
+                lista.add(this.funcionTablaDTO(resultado));
+            }
+
+            resultado.close();
+            preparedStatement.close();
+            conexion.close();
+
+            return lista;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
+        }
+    }
+    
     @Override
     public SalaEntidad actualizarSala(SalaEntidad sala) throws SQLException {
         String sql = "UPDATE Salas SET nombre = ?, capacidadAsientos = ?, idSucursal = ?,  WHERE idSala = ?";
@@ -228,4 +275,15 @@ public class SalaDAO implements ISalaDAO {
         int sucursal = rs.getInt("idSucursal");
         return new SalaEntidad(id,nombre,asientos,duracion,precio,sucursal);
     }
+    
+    private SalaDTO funcionTablaDTO(ResultSet rs) throws SQLException {
+        int id = rs.getInt("idSala");
+        String nombre = rs.getString("nombre");
+        int asientos = rs.getInt("capacidadAsientos");
+        int duracion = rs.getInt("tiempoDeLimpiezaMinutos");
+        float precio = rs.getFloat("precioActual");
+        int sucursal = rs.getInt("idSucursal");
+        return new SalaDTO(id,nombre,asientos,duracion,precio,sucursal);
+    }
+    
 }

@@ -18,7 +18,7 @@ import java.sql.Statement;
  *
  * @author filor
  */
-public class SucursalDAO {
+public class SucursalDAO implements ISucursalDAO{
     private IConexionBD conexionBD;
     private Connection conexionGeneral;
 

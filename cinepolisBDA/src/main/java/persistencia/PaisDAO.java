@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author filor
  */
-public class PaisDAO {
+public class PaisDAO implements IPaisDAO{
     private IConexionBD conexionBD;
 
     public PaisDAO(IConexionBD conexionBD) {
@@ -29,6 +29,7 @@ public class PaisDAO {
         this.conexionBD = new ConexionBD();
     }
     
+    @Override
     public void insertarPais(PaisDTO paisEntidad) throws PersistenciaException{
         try {
             Connection conexion = this.conexionBD.obtenerConexion();

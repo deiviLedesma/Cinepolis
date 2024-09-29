@@ -16,7 +16,7 @@ import java.sql.Statement;
  *
  * @author filor
  */
-public class ClasificacionDAO {
+public class ClasificacionDAO implements IClasificacionDAO {
     private IConexionBD conexionBD;
 
     public ClasificacionDAO() {
@@ -27,6 +27,7 @@ public class ClasificacionDAO {
         this.conexionBD = conexionBD;
     }
     
+    @Override
     public void insertarClasificacion(ClasificacionDTO clasificacion)throws PersistenciaException{
         try {
             Connection conexion = this.conexionBD.obtenerConexion();
@@ -57,6 +58,7 @@ public class ClasificacionDAO {
     
     }
     
+    @Override
        public void EliminarClasificacion(int idClasificacion) throws PersistenciaException, SQLException {
 
         String eliminar = "DELETE FROM Clasificaciones  WHERE idClasificacion = ?";

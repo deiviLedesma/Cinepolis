@@ -4,10 +4,13 @@
  */
 package Presentacion;
 
+import dtos.ClienteDTO;
 import entidad.ClienteEntidad;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import negocio.ClienteService;
+import negocio.NegocioException;
 import persistencia.ClienteDAO;
 import persistencia.PersistenciaException;
 
@@ -17,14 +20,13 @@ import persistencia.PersistenciaException;
  */
 public class LoginFrame extends javax.swing.JFrame {
 
-    private ClienteDAO clienteDAO;
-
+    private ClienteService clienteService;
     /**
      * Creates new form LoginFrame
      */
     public LoginFrame() {
         initComponents();
-        clienteDAO = new ClienteDAO();
+        this.clienteService = new ClienteService();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
     }
@@ -149,17 +151,18 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        ClienteEntidad ce = new ClienteEntidad();
+        ClienteDTO ce = new ClienteDTO();
         String correo = txtCorreo.getText();
         String contra = new String(txtContra.getPassword());
 
         try {
-            ClienteEntidad cliente = clienteDAO.buscarPorCorreo(correo);
-        } catch (PersistenciaException ex) {
+            ce = clienteService.buscarPorCorreo(correo);
+        } catch (NegocioException ex) {
             Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (ce != null && ce.getContrasenia().equals(contra)) {
             JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso");
+            
         }else{
             JOptionPane.showMessageDialog(this, "Correo o contraseña incorrecta");
         }

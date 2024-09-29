@@ -38,6 +38,18 @@ public class ClienteDTO {
         this.idCiudad = idCiudad;
     }
 
+    public ClienteDTO(int idCliente, String contrasenia, String correo, String nombres, String ApellidoPaterno, String ApellidoMaterno, Date fechaNacimiento, int idCiudad) {
+        this.idCliente = idCliente;
+        this.contrasenia = contrasenia;
+        this.correo = correo;
+        this.nombres = nombres;
+        this.ApellidoPaterno = ApellidoPaterno;
+        this.ApellidoMaterno = ApellidoMaterno;
+        this.fechaNacimiento = fechaNacimiento;
+        this.idCiudad = idCiudad;
+    }
+
+    
     public int getIdCliente() {
         return idCliente;
     }

@@ -16,7 +16,7 @@ import java.sql.Statement;
  *
  * @author filor
  */
-public class GeneroDAO {
+public class GeneroDAO implements IGeneroDAO {
     private IConexionBD conexionBD;
 
     public GeneroDAO() {
@@ -27,6 +27,7 @@ public class GeneroDAO {
         this.conexionBD = conexionBD;
     }
     
+    @Override
     public void insertarGenero(GeneroDTO genero)throws PersistenciaException{
         try {
             Connection conexion = this.conexionBD.obtenerConexion();

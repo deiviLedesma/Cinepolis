@@ -17,6 +17,8 @@ import java.util.List;
  */
 public interface IClienteDAO {
     
+    ClienteEntidad buscarPorCorreo(String correo) throws PersistenciaException;
+            
     public List<ClienteTablaDTO> buscarClientesTabla(FiltroTablaDTO filtro) throws PersistenciaException;
     
     public ClienteEntidad guardar(ClienteDTO cliente) throws PersistenciaException;

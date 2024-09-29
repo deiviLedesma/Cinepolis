@@ -98,6 +98,11 @@ public class FuncionDTO {
     public void setIdPelicula(int idPelicula) {
         this.idPelicula = idPelicula;
     }
+
+    @Override
+    public String toString() {
+        return "FuncionDTO{" + "idFuncion=" + idFuncion + ", horaIniciaFuncion=" + horaIniciaFuncion + ", precio=" + precio + '}';
+    }
     
     
 }

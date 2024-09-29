@@ -16,7 +16,7 @@ import java.sql.Statement;
  *
  * @author filor
  */
-public class CiudadDAO {
+public class CiudadDAO implements ICiudadDAO {
     private IConexionBD conexionBD;
 
     public CiudadDAO() {

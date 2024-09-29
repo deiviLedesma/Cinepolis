@@ -65,6 +65,22 @@ public class ClienteService {
         }
     }
     
+    public ClienteDTO buscarPorCorreo(String correo) throws NegocioException {
+        try {
+            if (correo == null) {
+                throw new NegocioException("Ingresar un correo");
+            }
+            ClienteEntidad clienteBuscado = this.clienteDAO.buscarPorCorreo(correo);
+            System.out.println(clienteBuscado);
+            ClienteDTO clienteDTO = this.convertirAClienteDTO(clienteBuscado);
+            System.out.println(clienteDTO);
+            return clienteDTO;
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            throw new NegocioException(ex.getMessage());
+        }
+    }
+    
     
     public ClienteDTO guardar(ClienteDTO cliente) throws NegocioException, SQLException {
         try {

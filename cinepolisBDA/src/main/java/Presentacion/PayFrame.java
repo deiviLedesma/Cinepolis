@@ -105,20 +105,20 @@ public class PayFrame extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
         jLabel2.setText("Seleecionar método de pago");
 
-        btnEfectivo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnEfectivo.setForeground(new java.awt.Color(102, 102, 102));
         btnEfectivo.setText("Efectivo");
         btnEfectivo.setBorder(null);
+        btnEfectivo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnEfectivo.setForeground(new java.awt.Color(102, 102, 102));
         btnEfectivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEfectivoActionPerformed(evt);
             }
         });
 
-        btnTarjeta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnTarjeta.setForeground(new java.awt.Color(102, 102, 102));
         btnTarjeta.setText("Tarjeta Crédito/Débito");
         btnTarjeta.setBorder(null);
+        btnTarjeta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnTarjeta.setForeground(new java.awt.Color(102, 102, 102));
         btnTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTarjetaActionPerformed(evt);
@@ -143,6 +143,12 @@ public class PayFrame extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
         jLabel6.setText("Nombre");
+
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(153, 153, 153));
@@ -510,6 +516,10 @@ public class PayFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor, ingresa una cantidad válida.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnTarjetaActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     /**
      * @param args the command line arguments

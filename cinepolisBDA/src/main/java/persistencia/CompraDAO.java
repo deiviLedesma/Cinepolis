@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
  *
  * @author filor
  */
-public class CompraDAO {
+public class CompraDAO implements ICompraDAO{
 
     private IConexionBD conexionBD;
     private Connection conexionGeneral;
@@ -33,6 +33,7 @@ public class CompraDAO {
         this.conexionBD = conexionBD;
     }
 
+    @Override
     public int guardarCompra(CompraDTO compra) throws SQLException {
         
         int idCompra = 0;
@@ -68,6 +69,7 @@ public class CompraDAO {
         return idCompra;
     }
 
+    @Override
     public CompraEntidad guardarConTransacion(CompraDTO compra) throws PersistenciaException {
         try {
             this.conexionGeneral = this.conexionBD.obtenerConexion();
@@ -97,6 +99,7 @@ public class CompraDAO {
         }
     }
 
+    @Override
     public CompraEntidad obtenerCompraPorId(int id) throws SQLException {
 
         CompraEntidad compra = null;
@@ -127,7 +130,8 @@ public class CompraDAO {
         }
     }
 
-    private CompraEntidad compraEntidad(ResultSet rs) throws SQLException {
+    @Override
+    public CompraEntidad compraEntidad(ResultSet rs) throws SQLException {
         int id = rs.getInt("idCompra");
         String codigo = rs.getString("codigoCompra");
         LocalDateTime hora = rs.getTimestamp("fechaHoraCompra").toLocalDateTime();
