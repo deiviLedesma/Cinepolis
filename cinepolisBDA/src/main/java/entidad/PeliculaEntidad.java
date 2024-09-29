@@ -45,6 +45,14 @@ public class PeliculaEntidad {
         this.idPais = idPais;
     }
 
+    public PeliculaEntidad(String pelicula_1, String descripción_1, String rutaimagen1jpg) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public PeliculaEntidad(String pelicula_1, String descripción_1, String rutaimagen1jpg) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public int getIdPais() {
         return idPais;
     }
@@ -115,6 +123,10 @@ public class PeliculaEntidad {
 
     public void setIdClasificacion(int idClasificacion) {
         this.idClasificacion = idClasificacion;
+    }
+
+    public String getDescripcion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

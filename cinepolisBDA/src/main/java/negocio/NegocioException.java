@@ -6,9 +6,10 @@ package negocio;
 
 /**
  *
- * @author filor
+ * @author SDavidLedesma
  */
 public class NegocioException extends Exception {
+
     public NegocioException(String message) {
         super(message);
     }
