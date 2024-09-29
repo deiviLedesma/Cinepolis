@@ -1,5 +1,6 @@
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\negocio\PaisService.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\negocio\ClasificacionService.java
+C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\Presentacion\frmAdminClienteCrud.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\CiudadDAO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\ConexionBD.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\PersistenciaException.java
@@ -15,11 +16,14 @@ C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\p
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\Presentacion\PayFrame.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\SalaDAO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\IConexionBD.java
+C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\enumerador\ClienteCRUDEnumerador.java
+C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\negocio\IClienteService.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\IFuncionDAO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\negocio\CiudadService.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\dtos\PeliculaDTO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\entidad\CiudadEntidad.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\CompraDAO.java
+C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\Presentacion\frmClienteOpcion.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\IGeneroDAO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\dtos\FiltroTablaDTO.java
 C:\Users\filor\OneDrive\Documentos\GitHub\Cinepolis\cinepolisBDA\src\main\java\persistencia\GeneroDAO.java

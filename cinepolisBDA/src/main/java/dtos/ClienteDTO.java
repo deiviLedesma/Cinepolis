@@ -49,6 +49,19 @@ public class ClienteDTO {
         this.idCiudad = idCiudad;
     }
 
+    public ClienteDTO(String nombres, String ApellidoPaterno, String ApellidoMaterno) {
+        this.nombres = nombres;
+        this.ApellidoPaterno = ApellidoPaterno;
+        this.ApellidoMaterno = ApellidoMaterno;
+    }
+
+    public ClienteDTO(int idCliente, String nombres, String ApellidoPaterno, String ApellidoMaterno) {
+        this.idCliente = idCliente;
+        this.nombres = nombres;
+        this.ApellidoPaterno = ApellidoPaterno;
+        this.ApellidoMaterno = ApellidoMaterno;
+    }
+
     
     public int getIdCliente() {
         return idCliente;
